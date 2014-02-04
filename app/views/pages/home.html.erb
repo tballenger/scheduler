@@ -5,15 +5,17 @@
   <div class="col-md-12">
     <h4>Pick a custom URL & connect to your accounting platform to get started:</h4>
   </div>
-  <div class="col-md-6">
-    <div class="input-group input-group-lg">
-      <span class="input-group-addon">scheduler.com/</span>
-      <input type="text" class="form-control" placeholder="Username">
-    </div>
-  </div>
-  <div class="col-md-2">
-    <%= link_to 'Xero', xero_session_new_path, :class => 'btn btn-info btn-lg btn-block' %>
-  </div>
+  <%= form_tag(xero_session_new_path) do %>
+      <div class="col-md-6">
+        <div class="input-group input-group-lg">
+          <span class="input-group-addon">scheduler.com/</span>
+          <%= text_field_tag 'user_name', session[:user_name], class: 'form-control', placeholder: 'Username' %>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <%=submit_tag 'Xero', class: 'btn btn-info btn-lg btn-block' %>
+      </div>
+  <%end%>
 </div>
 
 <div class="row">

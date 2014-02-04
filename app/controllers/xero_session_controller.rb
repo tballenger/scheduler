@@ -2,6 +2,7 @@ class XeroSessionController < ApplicationController
   before_filter :get_xero_client
 
   def new
+    session[:user_name] = params[:user_name] if params[:user_name].present?
     request_token = $xero.request_token(:oauth_callback => 'http://localhost:3000/xero_session/create')
     session[:request_token] = request_token.token
     session[:request_secret] = request_token.secret
@@ -20,7 +21,7 @@ class XeroSessionController < ApplicationController
 
     session.delete(:request_token)
     session.delete(:request_secret)
-    redirect_to root_path
+    redirect_to more_path
   end
 
   def destroy
