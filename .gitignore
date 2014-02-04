@@ -14,3 +14,11 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# Ignore locals schema
+/db/schema.rb
+
+# Ignore ide tempfiles.
+idea/*
+.idea/*
+.idea
