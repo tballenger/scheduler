@@ -1,0 +1,96 @@
+<div class="row">
+	<div class="col-md-10">
+		<h1>Bobs Hairdressers</h1>
+		<p class="lead">Please add your details to confirm appointment</p>
+	</div>
+</div>
+
+
+
+
+
+<div class="row">
+	<div class="col-md-12">
+	</div>
+	  <div class="col-md-3">
+	  	<label>First Name</label>
+	    <input type="text" class="form-control">
+	  </div>
+	  <div class="col-md-3">
+	    <label>Last Name</label>
+	    <input type="text" class="form-control">
+	  </div>
+	  <div class="col-md-3">
+	  	<label>Email Address</label>
+	    <input type="text" class="form-control">
+	  </div>
+	  <div class="col-md-3">
+	  	<label>Phone Number</label>
+	    <input type="text" class="form-control">
+	  </div>
+</div>
+
+<hr>
+
+<div class="row">
+	<div class="col-md-12 payment-details">
+	<h3>Add Payment Method</h3>
+	<p class="lead">Bob's Hairdressers requires pre-payment to hold appointments.</p>
+	<p class="text-muted">If you decide to cancel your appointment, you will be refunded 100%.</p>
+	</div>
+	 <div class="col-md-6">
+	  	<label>Credit Card Number</label>
+	    <input type="text" class="form-control">
+	  </div>
+	  <div class="col-md-3">
+	    <label>Exipration Date</label>
+	    <input type="text" class="form-control">
+	  </div>
+	  <div class="col-md-3">
+	  	<label>Billing Zip Code</label>
+	    <input type="text" class="form-control">
+	  </div>
+</div>
+
+<hr>
+
+<div class="row">
+	<div class="col-md-6">
+		<div class="selected-service">
+		<small>Selected service</small>
+		<h4>List group item heading</h4>
+		<p>Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+		<p>
+		<span class="price">$100.00</span>
+		<span class="duration">90 minutes</span>
+		</p>
+		<p><a href="#" class="btn btn-default">Change</a></p>
+		</div>
+
+	</div>
+
+
+
+	<div class="col-md-6">
+		<div class="selected-service">
+		<small>Selected Date</small>
+		<h4>February 3, 2014 11am to 12pm</h4>
+		<div class="list-group">
+		  <a href="#" class="list-group-item active">
+		    11am to 12pm
+		  </a>
+
+		</div>
+
+		<p><%= link_to "Change", "#", :class => "btn btn-default" %></p>
+		</div>
+	</div>
+
+</div><!--row-->
+
+<div class="row">
+	<div class="col-md-4">
+	<p><%= link_to "Confirm appointment", "#", :class => "btn btn-success btn-lg btn-block" %></p>
+	<p><small>Your appointment will be confirmed and your credit card will be charged $100.</small></p>
+	</div>
+</div>
