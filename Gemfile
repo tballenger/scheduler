@@ -51,6 +51,7 @@ group :doc do
 end
 
 gem 'xeroizer'
+gem 'devise'
 
 
 

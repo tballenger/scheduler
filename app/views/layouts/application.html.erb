@@ -10,8 +10,13 @@
 
 <%= render 'layouts/header' %>
 
+<!-- flash messages start -->
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
+<!-- flash messages end -->
+
 <div class="container">
-<%= yield %>
+  <%= yield %>
 </div>
 
 
