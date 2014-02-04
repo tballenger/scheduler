@@ -1,13 +1,16 @@
 Scheduler::Application.routes.draw do
-  root "pages#home"
+  get "xero_session/new"
+  get "xero_session/create"
+  get "xero_session/destroy"
+  root 'pages#home'
 
-  get "about" => "pages#about"
+  get 'about' => 'pages#about'
 
-  get "more" => "pages#more"
+  get 'more' => 'pages#more'
 
-  get "evenmore" => "pages#evenmore"
+  get 'evenmore' => 'pages#evenmore'
 
-  get "confirmation" => "pages#confirmation"
+  get 'confirmation' => 'pages#confirmation'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
