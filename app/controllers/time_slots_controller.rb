@@ -10,6 +10,7 @@ class TimeSlotsController < ApplicationController
   # GET /time_slots/1
   # GET /time_slots/1.json
   def show
+    session[:time_slot_id_selected] =  @time_slot.id ; redirect_to calendar_path
   end
 
   # GET /time_slots/new

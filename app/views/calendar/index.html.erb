@@ -15,17 +15,13 @@
     <small>Selected Date</small>
     <%if @event %>
         <h5> <%= "#{@event.title}" %></h5>
-        <h4> <%= "#{@event.starts_at.strftime("%d-%m-%Y %H:%M")} to #{@event.ends_at.strftime("%d-%m-%Y %H:%M")}" %></h4>
-
+        <h4> <%= "#{ parse_datetime(@event.starts_at)}  to #{parse_datetime(@event.ends_at)}" %></h4>
         <div class="list-group">
           <% @event.time_slots.each do |time_slot| %>
-              <a href="#" class="list-group-item"><%= "#{time_slot.starts_at.strftime("%H:%M")} to #{time_slot.ends_at.strftime("%H:%M")}" %></a>
+              <a href="<%= time_slot_path(time_slot) %>" class="list-group-item <%= session[:time_slot_id_selected] == time_slot.id ? 'active' : '' %>"><%= "#{ parse_time(time_slot.starts_at)} to #{parse_time(time_slot.ends_at)}" %></a>
           <%end%>
-          <a href="#" class="list-group-item active">
-            11am to 12pm
-          </a>
         </div>
-        <p><%= link_to "Confirm", "#", :class => "btn btn-success btn-lg btn-block" %></p>
+        <p><%= link_to "Confirm", new_contact_path , :class => "btn btn-success btn-lg btn-block #{session[:time_slot_id_selected] ? '' : 'disabled' }" %></p>
         <p>Times in Pacific Standard Time (PST)</p>
     <%else%>
         <h4>No Event Selected</h4>
