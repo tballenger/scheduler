@@ -1,6 +1,8 @@
 Scheduler::Application.routes.draw do
 
 
+  resources :events
+
   resources :services
 
   devise_for :users
