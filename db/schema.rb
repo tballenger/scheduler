@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140205031047) do
+ActiveRecord::Schema.define(version: 20140205184812) do
+
+  create_table "contacts", force: true do |t|
+    t.string   "name",          null: false
+    t.string   "first_name",    null: false
+    t.string   "last_name",     null: false
+    t.string   "email_address"
+    t.string   "phone_number"
+    t.string   "xero_uid"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "events", force: true do |t|
     t.string   "title"

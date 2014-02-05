@@ -1,12 +1,9 @@
 Scheduler::Application.routes.draw do
 
 
-  get "calendar/index"
-  resources :events
 
-  resources :services
+  resources :contacts
 
-  devise_for :users
   root 'pages#home'
 
   get 'about' => 'pages#about'
@@ -16,6 +13,14 @@ Scheduler::Application.routes.draw do
   get 'evenmore' => 'pages#evenmore'
 
   get 'confirmation' => 'pages#confirmation'
+
+  get 'calendar/index', as: :calendar
+
+  resources :events
+
+  resources :services
+
+  devise_for :users
 
   post "xero_session/new"
   get "xero_session/create"
