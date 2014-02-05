@@ -37,6 +37,25 @@ class Event < ActiveRecord::Base
     self.title
   end
 
+  # When admin create a new events for more than a hour, we need to generate all slots (multiple vents) availables
+  def create_slots
+    if !(self.starts_at < self.ends_at)
+      raise 'Error, ends at should be greater that starts at' #TODO: move to a class validation
+    end
+    hour = self.starts_at
+    end_time = self.ends_at
+
+    while hour < end_time
+      puts hour
+      Event.create!(:starts_at=> hour, :ends_at => hour + 1.hour, :service => self.service )
+      hour += 1.hour
+    end
+
+    return true
+
+  end
+
+
   private
   def check_and_set_title
     if self.title.blank? && self.service

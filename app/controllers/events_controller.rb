@@ -42,7 +42,7 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
 
     respond_to do |format|
-      if @event.save
+      if @event.create_slots
         format.html { redirect_to calendar_path, notice: 'Event was successfully created.' }
         format.json { render action: 'show', status: :created, location: @event }
       else
