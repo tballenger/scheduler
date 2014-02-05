@@ -4,12 +4,27 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    #@events = Event.all
+    @events = Event.scoped
+    @events = @events.after(params['start']) if (params['start'])
+    @events = @events.before(params['end']) if (params['end'])
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @events }
+      format.js  { render :json => @events }
+    end
+
   end
 
   # GET /events/1
   # GET /events/1.json
   def show
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @event }
+      format.js { render :json => @event.to_json }
+    end
   end
 
   # GET /events/new
@@ -44,9 +59,11 @@ class EventsController < ApplicationController
       if @event.update(event_params)
         format.html { redirect_to @event, notice: 'Event was successfully updated.' }
         format.json { head :no_content }
+        format.js { head :ok}
       else
         format.html { render action: 'edit' }
         format.json { render json: @event.errors, status: :unprocessable_entity }
+        format.js  { render :js => @event.errors, :status => :unprocessable_entity }
       end
     end
   end
