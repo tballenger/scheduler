@@ -1,5 +1,8 @@
 class Service < ActiveRecord::Base
-  validate :name, presence: true
-  validate :price, presence: true, numericality: true
-  validate :minutes_duration, presence: true, numericality: true
+  validates :name, presence: true
+  validates :price, presence: true, numericality: true
+  validates :minutes_duration, presence: true, numericality: true
+
+  has_many :events
+
 end

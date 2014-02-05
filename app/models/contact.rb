@@ -1,8 +1,8 @@
 class Contact < ActiveRecord::Base
-  validate :first_name, presence: true
-  validate :last_name, presence: true
+  validates :first_name, presence: true
+  validates :last_name, presence: true
 
-  validate :email_address, :presence => true, :uniqueness => true
+  validates :email_address, :presence => true, :uniqueness => true
   before_save :check_and_set_name
 
   def self.synchronize(xero)
