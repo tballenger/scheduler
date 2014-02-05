@@ -21,7 +21,7 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
     respond_to do |format|
-      format.html # show.html.erb
+      format.html { session[:event_id_selected] = @event.id ; redirect_to calendar_path }
       format.xml  { render :xml => @event }
       format.js { render :json => @event.to_json }
     end

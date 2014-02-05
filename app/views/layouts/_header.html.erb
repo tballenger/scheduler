@@ -16,7 +16,7 @@
             <li class="<%= controller_name == 'services' ? 'active' : '' %>"><%= link_to "Services", services_path %></li>
             <li class="<%= controller_name == 'contacts' && action_name == 'index' ? 'active' : '' %>"><%= link_to "Contacts", contacts_path %></li>
             <li class="<%= controller_name == 'events' ? 'active' : '' %>"><%= link_to "Events", events_path %></li>
-            <li class="<%= controller_name == 'calendar' ? 'active' : '' %>"><%= link_to "Calendar", calendar_path, 'data-no-turbolink' => true %></li>
+            <li class="<%= controller_name == 'calendar' ? 'active' : '' %>"><%= link_to "Calendar", calendar_path%></li>
             <!--<li><%= link_to "More", more_path %></li> moved to calendar  -->
             <!--<li><%= link_to "EvenMore", evenmore_path %></li> moved to contacts  -->
             <li class="<%= controller_name == 'contacts' && action_name == 'new'  ? 'active' : '' %>"><%= link_to "EvenMore", new_contact_path %></li>

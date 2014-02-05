@@ -13,18 +13,24 @@
   </div>
   <div class="col-md-4">
     <small>Selected Date</small>
-    <h4>February 3, 2014 11am to 12pm</h4>
-    <div class="list-group">
-      <a href="#" class="list-group-item">9am to 10am</a>
-      <a href="#" class="list-group-item active">
-        11am to 12pm
-      </a>
-      <a href="#" class="list-group-item">2pm to 3pm</a>
-      <a href="#" class="list-group-item">3pm to 4pm</a>
-      <a href="#" class="list-group-item">5pm to 6pm</a>
-    </div>
-    <p><%= link_to "Confirm", "#", :class => "btn btn-success btn-lg btn-block" %></p>
-    <p>Times in Pacific Standard Time (PST)</p>
+    <%if @event %>
+        <h5> <%= "#{@event.title}" %></h5>
+        <h4> <%= "#{@event.starts_at.strftime("%d-%m-%Y %H:%M")} to #{@event.ends_at.strftime("%d-%m-%Y %H:%M")}" %></h4>
+
+        <div class="list-group">
+          <a href="#" class="list-group-item">9am to 10am</a>
+          <a href="#" class="list-group-item active">
+            11am to 12pm
+          </a>
+          <a href="#" class="list-group-item">2pm to 3pm</a>
+          <a href="#" class="list-group-item">3pm to 4pm</a>
+          <a href="#" class="list-group-item">5pm to 6pm</a>
+        </div>
+        <p><%= link_to "Confirm", "#", :class => "btn btn-success btn-lg btn-block" %></p>
+        <p>Times in Pacific Standard Time (PST)</p>
+    <%else%>
+        <h4>No Event Selected</h4>
+    <%end%>
   </div>
 </div>
 
@@ -46,6 +52,86 @@
   </div>
 
 </div><!--row-->
+
+
+<script type="text/javascript">
+
+
+    $.ajaxSetup({
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader("Accept", "text/javascript");
+        }
+    });
+
+
+    $(document).ready(function() {
+        var date = new Date();
+        var d = date.getDate();
+        var m = date.getMonth();
+        var y = date.getFullYear();
+
+        $('#calendar').fullCalendar({
+            editable: true,
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
+            defaultView: 'month',
+            height: 500,
+            slotMinutes: 15,
+
+            loading: function(bool){
+                if (bool)
+                    $('#loading').show();
+                else
+                    $('#loading').hide();
+            },
+
+            // a future calendar might have many sources.
+            eventSources: [{
+                url: '/events',
+                color: 'yellow',
+                textColor: 'black',
+                ignoreTimezone: false
+            }],
+
+            timeFormat: 'h:mm t{ - h:mm t} ',
+            dragOpacity: "0.5",
+
+            //http://arshaw.com/fullcalendar/docs/event_ui/eventDrop/
+            eventDrop: function(event, dayDelta, minuteDelta, allDay, revertFunc){
+                updateEvent(event);
+            },
+
+            // http://arshaw.com/fullcalendar/docs/event_ui/eventResize/
+            eventResize: function(event, dayDelta, minuteDelta, revertFunc){
+                updateEvent(event);
+            },
+
+            // http://arshaw.com/fullcalendar/docs/mouse/eventClick/
+            eventClick: function(event, jsEvent, view){
+                //alert("selected");
+                //return false;
+
+            }
+        });
+    });
+
+    function updateEvent(the_event) {
+        $.update(
+                "/events/" + the_event.id,
+                { event: { title: the_event.title,
+                    starts_at: "" + the_event.start,
+                    ends_at: "" + the_event.end,
+                    description: the_event.description
+                }
+                },
+                function (reponse) { alert('successfully updated task.'); }
+        );
+    };
+
+</script>
 
 
 
