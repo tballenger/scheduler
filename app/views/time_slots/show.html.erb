@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Starts at:</strong>
+  <%= @time_slot.starts_at %>
+</p>
+
+<p>
+  <strong>Ends at:</strong>
+  <%= @time_slot.ends_at %>
+</p>
+
+<p>
+  <strong>Event:</strong>
+  <%= @time_slot.event_id %>
+</p>
+
+<p>
+  <strong>Contact:</strong>
+  <%= @time_slot.contact_id %>
+</p>
+
+<%= link_to 'Edit', edit_time_slot_path(@time_slot) %> |
+<%= link_to 'Back', time_slots_path %>

@@ -4,11 +4,15 @@ class Event < ActiveRecord::Base
   validates :service_id, :presence => true
 
   belongs_to :service
+  has_many :time_slots
+
 
   scope :before, lambda {|end_time| {:conditions => ["ends_at < ?", Event.format_date(end_time)] }}
   scope :after, lambda {|start_time| {:conditions => ["starts_at > ?", Event.format_date(start_time)] }}
 
   before_validation :check_and_set_title
+
+  after_create :create_time_slots
 
   # need to override the json view to return what full_calendar is expecting.
   # http://arshaw.com/fullcalendar/docs/event_data/Event_Object/
@@ -37,8 +41,19 @@ class Event < ActiveRecord::Base
     self.title
   end
 
+
+
+
+  private
+  def check_and_set_title
+    if self.title.blank? && self.service
+      self.title = self.service.name
+    end
+  end
+
+
   # When admin create a new events for more than a hour, we need to generate all slots (multiple vents) availables
-  def create_slots
+  def create_time_slots
     if !(self.starts_at < self.ends_at)
       raise 'Error, ends at should be greater that starts at' #TODO: move to a class validation
     end
@@ -47,20 +62,12 @@ class Event < ActiveRecord::Base
 
     while hour < end_time
       puts hour
-      Event.create!(:starts_at=> hour, :ends_at => hour + 1.hour, :service => self.service )
+      TimeSlot.create!(:starts_at=> hour, :ends_at => hour + 1.hour, :event => self )
       hour += 1.hour
     end
 
     return true
 
-  end
-
-
-  private
-  def check_and_set_title
-    if self.title.blank? && self.service
-      self.title = self.service.name
-    end
   end
 
 end

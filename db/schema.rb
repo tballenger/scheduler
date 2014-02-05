@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140205213211) do
+ActiveRecord::Schema.define(version: 20140205224432) do
 
   create_table "contacts", force: true do |t|
     t.string   "name",          null: false
@@ -42,6 +42,15 @@ ActiveRecord::Schema.define(version: 20140205213211) do
     t.decimal  "price",            null: false
     t.integer  "minutes_duration", null: false
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "time_slots", force: true do |t|
+    t.datetime "starts_at",  null: false
+    t.datetime "ends_at",    null: false
+    t.integer  "event_id",   null: false
+    t.integer  "contact_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

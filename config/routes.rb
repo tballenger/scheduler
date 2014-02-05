@@ -2,6 +2,8 @@ Scheduler::Application.routes.draw do
 
 
 
+  resources :time_slots
+
   root 'pages#home'
 
   get 'about' => 'pages#about'
