@@ -5,6 +5,31 @@ class ContactsController < ApplicationController
   # GET /contacts.json
   def index
     @contacts = Contact.all
+    if session[:xero_auth] && $xero
+      begin
+        @remote_contacts = $xero.Contact.all(:order => 'Name')
+      rescue
+        #expired session
+        session[:xero_auth] = nil
+        $xero = nil
+      end
+    else
+      @remote_contacts = []
+    end
+  end
+
+  # GET /contacts
+  # GET /contacts.json
+  def synchronize
+    if session[:xero_auth] && $xero
+      Contact.synchronize($xero)
+    else
+      raise 'Not connection Found'
+    end
+    respond_to do |format|
+      format.html { redirect_to contacts_url }
+      format.json { head :no_content }
+    end
   end
 
   # GET /contacts/1
@@ -28,7 +53,7 @@ class ContactsController < ApplicationController
 
     respond_to do |format|
       if @contact.save
-        format.html { redirect_to @contact, notice: 'Contact was successfully created.' }
+        format.html { redirect_to contacts_path, notice: 'Contact was successfully created.' }
         format.json { render action: 'show', status: :created, location: @contact }
       else
         format.html { render action: 'new' }
@@ -42,7 +67,7 @@ class ContactsController < ApplicationController
   def update
     respond_to do |format|
       if @contact.update(contact_params)
-        format.html { redirect_to @contact, notice: 'Contact was successfully updated.' }
+        format.html { redirect_to contacts_path, notice: 'Contact was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

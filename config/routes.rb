@@ -2,8 +2,6 @@ Scheduler::Application.routes.draw do
 
 
 
-  resources :contacts
-
   root 'pages#home'
 
   get 'about' => 'pages#about'
@@ -22,9 +20,15 @@ Scheduler::Application.routes.draw do
 
   devise_for :users
 
-  post "xero_session/new"
-  get "xero_session/create"
-  get "xero_session/destroy"
+  post 'xero_session/new'
+  get 'xero_session/create'
+  get 'xero_session/destroy'
+
+  resources :contacts do
+    collection do
+      get 'synchronize'
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
