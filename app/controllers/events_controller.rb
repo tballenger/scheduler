@@ -12,7 +12,7 @@ class EventsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @events }
-      format.js  { render :json => @events }
+      format.js  { render :json => @events.to_json(:event_id_selected => session[:event_id_selected]) }
     end
 
   end
@@ -23,7 +23,7 @@ class EventsController < ApplicationController
     respond_to do |format|
       format.html { session[:event_id_selected] = @event.id ; redirect_to calendar_path }
       format.xml  { render :xml => @event }
-      format.js { render :json => @event.to_json }
+      format.js { render :json => @event.to_json(:event_id_selected => session[:event_id_selected]) }
     end
   end
 
