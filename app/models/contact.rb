@@ -43,8 +43,13 @@ class Contact < ActiveRecord::Base
 
           #generate Invoice
 
-          invoice = xero.Invoice.build(:contact => contact, :type => 'ACCREC')
-          line_item = invoice.add_line_item({:item_code => time_slot.event.title, :description => time_slot.event.service.description , :quantity => 1, :unit_amount => time_slot.event.service.price, :tax_amount => 0.0, :account_code => 200})
+          invoice = xero.Invoice.build(:contact => contact, :type => 'ACCREC', :date => Date.today, :due_date => time_slot.starts_at )
+          line_item = invoice.add_line_item({:item_code => time_slot.event.title,
+                                             :description => time_slot.event.service.description,
+                                             :quantity => 1,
+                                             :unit_amount => time_slot.event.service.price,
+                                             :tax_amount => 0.0,
+                                             :account_code => 200})
 
           if invoice.save
             #billing made
@@ -91,24 +96,27 @@ class Contact < ActiveRecord::Base
         #Upload bills end
 
       end
+      begin
+        remote_contact = xero.Contact.find(contact.xero_uid)
+        #contact.name = "Another Name Change"
+        #remote_contact.save
 
-      remote_contact = xero.Contact.find(contact.xero_uid)
-      #contact.name = "Another Name Change"
-      #remote_contact.save
+        #Upload bills start  #TODO: move to a private method for avoid duplication
+        contact.time_slots.where(:billed => false).each do |time_slot|
+          #generate billing
+          invoice = xero.Invoice.build(:contact => remote_contact, :type => 'ACCREC')
+          line_item = invoice.add_line_item({:description => time_slot.event.title , :quantity => 1, :unit_amount => time_slot.event.service.price, :tax_amount => 0.0, :account_code => 200})
 
-      #Upload bills start  #TODO: move to a private method for avoid duplication
-      contact.time_slots.where(:billed => false).each do |time_slot|
-        #generate billing
-        invoice = xero.Invoice.build(:contact => remote_contact, :type => 'ACCREC')
-        line_item = invoice.add_line_item({:description => time_slot.event.title , :quantity => 1, :unit_amount => time_slot.event.service.price, :tax_amount => 0.0, :account_code => 200})
-
-        if invoice.save
-          #billing made
-          time_slot.update_attribute(:billed,true)
+          if invoice.save
+            #billing made
+            time_slot.update_attribute(:billed,true)
+          end
         end
+          #Upload bills end
+      rescue Exception => e
+        # do some logging
+        puts e.to_s
       end
-      #Upload bills end
-
 
     end
 
