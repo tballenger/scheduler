@@ -26,12 +26,9 @@ class ContactsController < ApplicationController
     if session[:xero_auth] && $xero
       Contact.synchronize($xero)
     else
-      raise 'Not connection Found'
+      redirect_to xero_reconnect_path and return
     end
-    respond_to do |format|
-      format.html { redirect_to contacts_url }
-      format.json { head :no_content }
-    end
+    redirect_to contacts_url
   end
 
   # GET /contacts/1

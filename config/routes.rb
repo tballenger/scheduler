@@ -23,6 +23,8 @@ Scheduler::Application.routes.draw do
   devise_for :users
 
   post 'xero_session/new'
+  get 'xero_reconnect' => 'xero_session#new', as: :xero_reconnect
+
   get 'xero_session/create'
   get 'xero_session/destroy'
 
