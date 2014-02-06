@@ -9,4 +9,9 @@ class TimeSlot < ActiveRecord::Base
 
   belongs_to :contact
 
+
+  def free?
+    !self.contact
+  end
+
 end

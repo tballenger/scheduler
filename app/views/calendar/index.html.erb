@@ -18,7 +18,11 @@
         <h4><%= "From #{ parse_datetime(@event.starts_at)}" %></h4>
         <div class="list-group">
           <% @event.time_slots.each do |time_slot| %>
-              <a href="<%= time_slot_path(time_slot) %>" class="list-group-item <%= @time_slot == time_slot ? 'active' : '' %>"><%= "#{ parse_time(time_slot.starts_at)} to #{parse_time(time_slot.ends_at)}" %></a>
+              <% if time_slot.free? %>
+                  <a href="<%= time_slot_path(time_slot) %>" class="list-group-item <%= @time_slot == time_slot ? 'active' : '' %>"><%= "#{ parse_time(time_slot.starts_at)} to #{parse_time(time_slot.ends_at)}" %></a>
+              <%else%>
+                  <a href="#>" class="list-group-item list-group-item-selected"><%= "#{ parse_time(time_slot.starts_at)} to #{parse_time(time_slot.ends_at)}" %></a>
+              <%end%>
           <%end%>
         </div>
         <p><%= link_to "Confirm", new_contact_path , :class => "btn btn-success btn-lg btn-block #{@time_slot ? '' : 'disabled' }" %></p>

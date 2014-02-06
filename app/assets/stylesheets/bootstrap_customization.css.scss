@@ -40,6 +40,11 @@ body{
 	border-radius: 6px;
 	margin-top: 10px;
 }
+
+.list-group-item-selected{
+  background-color: #eee;
+}
+
 .selected-service{
 	padding: 15px;
 	border-radius: 6px;
