@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140206003539) do
+ActiveRecord::Schema.define(version: 20140206031955) do
 
   create_table "contacts", force: true do |t|
     t.string   "name",          null: false
@@ -47,12 +47,13 @@ ActiveRecord::Schema.define(version: 20140206003539) do
   end
 
   create_table "time_slots", force: true do |t|
-    t.datetime "starts_at",  null: false
-    t.datetime "ends_at",    null: false
-    t.integer  "event_id",   null: false
+    t.datetime "starts_at",                  null: false
+    t.datetime "ends_at",                    null: false
+    t.integer  "event_id",                   null: false
     t.integer  "contact_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "billed",     default: false
   end
 
   create_table "users", force: true do |t|

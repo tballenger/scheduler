@@ -25,32 +25,45 @@ class Contact < ActiveRecord::Base
       end
       if local_contact
         #update local information
-         local_contact.update_attributes(:name => contact.name, :first_name => contact.first_name, :last_name => contact.last_name, :xero_uid => contact.contact_id, :email_address => contact.email_address)
+        local_contact.update_attributes(:name => contact.name, :first_name => contact.first_name, :last_name => contact.last_name, :xero_uid => contact.contact_id, :email_address => contact.email_address)
+
+        #Upload bills
+        local_contact.time_slots.where(:billed => false).each do |time_slot|
+          #generate billing
+          invoice = xero.Invoice.build(:contact => contact, :type => 'ACCREC')
+          line_item = invoice.add_line_item({:description => time_slot.event.title , :quantity => 1, :unit_amount => time_slot.event.service.price, :tax_amount => 0.0, :account_code => 200})
+
+          if invoice.save
+            #billing made
+            time_slot.update_attribute(:billed,true)
+          end
+        end
+
       end
 
     end
 
     #add Xero contacts from local contacts -------------------------------------
-     Contact.all.each do |contact|
-         if contact.xero_uid.blank?
-           #new contact --> Add to Xero
-             remote_contact = xero.Contact.build(:name => contact.name)
-             remote_contact.first_name = contact.first_name
-             remote_contact.last_name = contact.last_name
-             remote_contact.last_name = contact.last_name
-             remote_contact.email_address = contact.email_address
-             #contact.add_address(:type => 'STREET', :line1 => '12 Testing Lane', :city => 'Brisbane')
-             #contact.add_phone(:type => 'DEFAULT', :area_code => '07', :number => '3033 1234')
-             #contact.add_phone(:type => 'MOBILE', :number => '0412 123 456')
-             remote_contact.save
-         else
-           #TODO: try to update contact from local data
-           #remote_contact = xero.Contact.find(contact.xero_uid)
-           #contact.name = "Another Name Change"
-           #remote_contact.save
+    Contact.all.each do |contact|
+      if contact.xero_uid.blank?
+        #new contact --> Add to Xero
+        remote_contact = xero.Contact.build(:name => contact.name)
+        remote_contact.first_name = contact.first_name
+        remote_contact.last_name = contact.last_name
+        remote_contact.last_name = contact.last_name
+        remote_contact.email_address = contact.email_address
+        #contact.add_address(:type => 'STREET', :line1 => '12 Testing Lane', :city => 'Brisbane')
+        #contact.add_phone(:type => 'DEFAULT', :area_code => '07', :number => '3033 1234')
+        #contact.add_phone(:type => 'MOBILE', :number => '0412 123 456')
+        remote_contact.save
+      else
+        #TODO: try to update contact from local data
+        #remote_contact = xero.Contact.find(contact.xero_uid)
+        #contact.name = "Another Name Change"
+        #remote_contact.save
 
-         end
-     end
+      end
+    end
 
 
   end
