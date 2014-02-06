@@ -12,10 +12,18 @@
     <div id='calendar'></div>
   </div>
   <div class="col-md-4">
-    <small>Selected Date</small>
+
+
+    <div class="panel panel-default">
     <%if @event %>
-        <h5><%= "#{@event.title}" %></h5>
-        <h4><%= "From #{ parse_datetime(@event.starts_at)}" %></h4>
+    <div class="panel-heading">
+    <h1 class="panel-title"><%= "#{@event.title}" %><span class="pull-right"><span class="glyphicon glyphicon-edit"></span></span></h1>
+    </div>
+
+    <div class="panel-body">
+        <h4><%= "#{ parse_datetime(@event.starts_at)}" %></h4>
+        
+        <p>Select from the open times below</p>
         <div class="list-group">
           <% @event.time_slots.each do |time_slot| %>
               <% if time_slot.free? %>
@@ -25,34 +33,21 @@
               <%end%>
           <%end%>
         </div>
-        <p><%= link_to "Confirm", new_contact_path , :class => "btn btn-success btn-lg btn-block #{@time_slot ? '' : 'disabled' }" %></p>
-        <p>Times in Pacific Standard Time (PST)</p>
+        <p><%= link_to new_contact_path , :class => "btn btn-success btn-lg btn-block #{@time_slot ? '' : 'disabled' }" do%>
+          <span class="glyphicon glyphicon-calendar"></span>
+          Confirm
+          <%end%>
+        </p>
     <%else%>
         <h4>No Event Selected</h4>
     <%end%>
+    </div><!--end body-->
+    </div>
   </div>
 </div>
 
-<hr>
 
-<%if @event %>
-    <div class="row">
-      <div class="col-md-6">
-        <div class="selected-service">
-          <small>Selected service</small>
-          <h4><%= @event.service.name %></h4>
-          <p><%= @event.service.description %></p>
-          <p>
-            <span class="price"> <%= number_to_currency @event.service.price %></span>
-            <span class="duration"><%= @event.service.minutes_duration %> minutes</span>
-          </p>
-          <p><a href="#" class="btn btn-default">Change</a></p>
-        </div>
 
-      </div>
-
-    </div><!--row-->
-<%end%>
 
 <script type="text/javascript">
 
@@ -91,8 +86,8 @@
             // a future calendar might have many sources.
             eventSources: [{
                 url: '/events',
-                color: 'yellow',
-                textColor: 'black',
+                color: '#357EBD',
+                textColor: '#fff',
                 ignoreTimezone: false
             }],
 
