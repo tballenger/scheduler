@@ -20,7 +20,13 @@ Scheduler::Application.routes.draw do
 
   resources :services
 
-  devise_for :users
+
+  devise_for :users, :controllers => { :registrations => 'registrations', :sessions => 'sessions'}
+
+  devise_scope :user do
+    get 'login', :to => 'devise/sessions#new'
+    get 'logout', :to => 'devise/sessions#destroy'
+  end
 
   post 'xero_session/new'
   get 'xero_reconnect' => 'xero_session#new', as: :xero_reconnect

@@ -26,7 +26,7 @@ class XeroSessionController < ApplicationController
 
   def destroy
     session.delete(:xero_auth)
-    redirect_to root_path
+    redirect_to logout_path
   end
 
 end
