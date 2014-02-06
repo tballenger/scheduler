@@ -9,7 +9,7 @@ class Contact < ActiveRecord::Base
 
   def self.synchronize(xero)
     xero_contacts = xero.Contact.all(:order => 'Name')
-    emails_list = []
+
 
     #add Xero contacts to local database -------------------------------------
     xero_contacts.entries.each do |contact|
@@ -29,9 +29,22 @@ class Contact < ActiveRecord::Base
 
         #Upload bills start  #TODO: move to a private method for avoid duplication
         local_contact.time_slots.where(:billed => false).each do |time_slot|
-          #generate billing
+
+          #create invoice item
+          xero_items = xero.Item.all(:where => "Code==\"#{time_slot.event.title}\"")
+          xero_item = nil
+          if xero_items.empty?
+            #create item
+            xero_item = xero.Item.build(:code =>time_slot.event.title)
+            xero_item.save
+          else
+            xero_item = xero_items.first
+          end
+
+          #generate Invoice
+
           invoice = xero.Invoice.build(:contact => contact, :type => 'ACCREC')
-          line_item = invoice.add_line_item({:description => time_slot.event.title , :quantity => 1, :unit_amount => time_slot.event.service.price, :tax_amount => 0.0, :account_code => 200})
+          line_item = invoice.add_line_item({:item_code => time_slot.event.title, :description => time_slot.event.service.description , :quantity => 1, :unit_amount => time_slot.event.service.price, :tax_amount => 0.0, :account_code => 200})
 
           if invoice.save
             #billing made
@@ -59,6 +72,7 @@ class Contact < ActiveRecord::Base
         remote_contact.save
       else
         #TODO: try to update contact from local data
+        #begin
         remote_contact = xero.Contact.find(contact.xero_uid)
         #contact.name = "Another Name Change"
         #remote_contact.save
