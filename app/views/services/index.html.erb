@@ -1,23 +1,43 @@
 <div class="row">
-  <div class="col-md-10">
+  <div class="col-md-12">
     <h1>Bobs Hairdressers</h1>
-    <p class="lead">Available services</p>
+    <p class="lead">Please select a service</p>
+    
   </div>
 </div>
 
 <div class="row">
   <div class="col-md-8">
-    <div class="list-group">
+    <div class="services-list">
       <% @services.each do |service| %>
-          <a href="<%= service_path(service) %>" class="list-group-item ">
-            <p class="list-group-item-text select pull-right">Select</p>
-            <h4 class="list-group-item-heading"><%= service.name %></h4>
-            <p class="list-group-item-text"><%= service.description %></p>
-            <p class="list-group-item-text">
-              <span class="price"> <%= number_to_currency service.price %></span>
-              <span class="duration"><%= service.minutes_duration %> minutes</span>
-            </p>
-          </a>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <div class="row">
+              <div class="col-md-8">
+                <h1><%= service.name %></h1>
+              </div>
+              <div class="col-md-4">
+                 <%= link_to "Select", service_path(service), :class => "btn btn-primary btn-block" %>
+              </div>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-6 description">
+                <small>Description</small>
+                <p class="list-group-item-text"><%= service.description %></p>
+              </div>
+              <div class="col-md-3">
+                <small>Price</small>
+                <p class="price lead"> <%= number_to_currency service.price %></p>
+              </div>
+              <div class="col-md-3">
+                <small>Duration</small>
+                <p class="duration lead"><%= service.minutes_duration %> minutes</p>
+              </div>
+            </div>
+          </div>
+        </div>
       <% end %>
     </div>
     <div class="col-md-4">
@@ -28,7 +48,7 @@
   <div class="col-md-4">
     <img src="http://placehold.it/300x200" class="img-responsive">
     <h4>About Bobs Hairdressers</h4>
-    <p>Welcome to float Zurich Here you can book your appointment online for float. The booked room is available then solely at your disposition. Our opening times are: daily from 9:30 - 22:30 except Wednesday from 14:00 clock - 22:00 clock float SAVINGS RATES apply from 1 - To 28 Feb. 2014 on the following dates: (In the booking confirmation, all prices and savings rates are listed again) CAPSULE: CHF 85 - (instead of CHF 120 -) Monday to Friday all day TANK for 1 person: CHF 105 - (instead of CHF 140 -) each Monday and Tuesday all day POOL for 2 persons: CH</p>
+    <p>Description of the profile goes here. Should support markdown.</p>
 
     <h4>More information</h4>
     <p>Website url</p>

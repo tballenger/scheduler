@@ -1,15 +1,21 @@
+<section>
+<div class="center">
 <h1>Simple Appointment Scheduling</h1>
-<p class="lead">Let your customers view, book and pay for appointments. All integrated seamlessly with your accounting.</p>
+<p class="lead">Let your customers view, book and pay for services and appointments. <br>All integrated seamlessly with your accounting platform.</p>
+</div>
+</section>
 
-<div class="row well">
-  <div class="col-md-12">
-    <h4>Pick a custom URL & connect to your accounting platform to get started:</h4>
-  </div>
+<section>
+<div class="row center">
+  <h3>Get Started</h3>
+  <div class="col-md-12 well">
+    <h4>Pick a custom URL & connect to your accounting platform:</h4>
+  
   <%= form_tag(xero_session_new_path) do %>
-      <div class="col-md-6">
+      <div class="col-md-offset-2 col-md-6">
         <div class="input-group input-group-lg">
           <span class="input-group-addon">scheduler.com/</span>
-          <%= text_field_tag 'user_name', session[:user_name], class: 'form-control', placeholder: 'Username' %>
+          <%= text_field_tag 'user_name', session[:user_name], class: 'form-control', placeholder: 'Username', :required => 'true' %>
         </div>
       </div>
       <div class="col-md-2">
@@ -17,10 +23,12 @@
       </div>
   <%end%>
 </div>
+</section>
 
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-12 center">
     <h3>How it works</h3>
+    <hr>
   </div>
   <div class="col-md-4">
     <h4>Connect your accounting platform</h4>
@@ -33,7 +41,7 @@
   </div>
 
   <div class="col-md-4">
-    <h4>You're ready for scheduling!</h4>
+    <h4>You're all set up!</h4>
     <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters</p>
   </div>
 </div>

@@ -5,7 +5,7 @@ $container-large-desktop: ((930px + $grid-gutter-width));
 @import 'bootstrap';
 
 body{
-	padding-top: 80px;
+	padding-top: 20px;
 }
 
 .center{
@@ -20,26 +20,6 @@ body{
 .list-group-confirmation{
 	padding: 10px 0;
 }
-.selected-service .price{
-	font-weight: bold;
-	padding-right: 10px;
-	font-size: 14px;;
-}
-.selected-service .duration{
-	font-weight: bold;	
-	font-size: 14px;;
-}
-.list-group-item-text.select{
-	padding: 10px;
-	background-color: #428BCA;
-	border-color: #357EBD;
-	color: #fff;
-	padding: 10px 16px;
-	font-size: 14px;
-	line-height: 1.33;
-	border-radius: 6px;
-	margin-top: 10px;
-}
 
 .list-group-item-selected{
   background-color: #eee;
@@ -51,10 +31,33 @@ body{
 	border: 1px solid #eee;
 	margin-bottom: 20px;
 	min-height: 200px;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
 .selected-service p{
 	margin: 0 0 5px;
 }
 .payment-details > .lead{
 	margin-bottom: 5px;
+}
+//service list
+.services-list .panel-default > .panel-heading h1{
+	font-size: 24px;
+	margin-top: 3px;
+	margin-bottom: 0;
+}
+.panel-body .description{
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+//calendar
+h1.panel-title{
+	font-size: 24px;
+}
+.panel-title .glyphicon{
+	font-size: 16px;
+}
+.fc-header-title h2{
+	font-size: 24px;
 }
