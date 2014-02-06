@@ -1,52 +1,109 @@
 <div class="row">
-	<div class="col-md-10">
-		<h1>Bobs Hairdressers</h1>
-		<p class="lead">Available services</p>
+	<div class="col-md-12 center">
+		<h1>Setup your account</h1>
+		<p class="lead">You're just seconds away from letting customers book appointments for your store online!</p>
 	</div>
 </div>
 
+<hr>
+
 <div class="row">
 	<div class="col-md-8">
-			<div class="list-group">
-			  <a href="#" class="list-group-item ">
-			  	<p class="list-group-item-text select pull-right">Select</p>
-			    <h4 class="list-group-item-heading">List group item heading</h4>
-			    <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-			    <p class="list-group-item-text">
-			    		<span class="price">$100.00</span>
-			    		<span class="duration">90 minutes</span>
-			    </p>
-			  </a>
-			  <a href="#" class="list-group-item">
-			  	<p class="list-group-item-text select pull-right">Select</p>
-			    <h4 class="list-group-item-heading">List group item heading</h4>
-			    <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-			    <p class="list-group-item-text">
-			    		<span class="price">$100.00</span>
-			    		<span class="duration">90 minutes</span>
-			    </p>
-			  </a>
-			  <a href="#" class="list-group-item">
-			  	<p class="list-group-item-text select pull-right">Select</p>
-			    <h4 class="list-group-item-heading">List group item heading</h4>
-			    <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-			    <p class="list-group-item-text">
-			    		<span class="price">$100.00</span>
-			    		<span class="duration">90 minutes</span>
-			    </p>
-			  </a>
+		<div class="row">
+			<div class="row">
+				<div class="center new-number col-md-1">
+					<span>1</span>
+				</div>
+				<div class="step col-md-11">
+					<h3>Pick your custom name</h3>
+					<p>Choose your unique business name. Your customers will be able to view your services and book available times online.</p>
+					<div class="input-group">
+					  <span class="input-group-addon">scheduler.com/</span>
+					  <%= text_field_tag 'user_name', session[:user_name], class: 'form-control', placeholder: 'Username', :required => 'true' %>
+					</div>
+				</div>
 			</div>
-	</div>
+
+			<hr>
+	
+			<div class="row">
+				<div class="center new-number col-md-1">
+					<span>2</span>
+				</div>
+				<div class="step col-md-11">
+					<h3>Create your login</h3>
+					<p>Please enter a valid email address for your business and create a password</p>
+
+						<div class="row">
+							<div class="col-md-12">
+								<label>Email address</label>
+								<input type="text" class="form-control">
+							</div>
+						</div>
+					
+						<div class="row">
+							<div class="col-md-6">
+								<label>Create password</label>
+								<input type="text" class="form-control">
+							</div>
+							<div class="col-md-6">
+								<label>Confirm Password</label>
+								<input type="text" class="form-control">
+							</div>
+						</div>				  
+					</div>
+			</div>
+
+			<hr>
+
+			<div class="row">
+				<div class="center new-number col-md-1">
+					<span>3</span>
+				</div>
+				<div class="step col-md-11">
+					<h3>Enter your billing information</h3>
+					<div class="alert alert-warning">
+						<p><strong>14 day trial</strong></p>
+						<small>You won't be billed unless you keep your account open past your 14-day free trial. We need your billing information to reduce fraud and verify you have a valid business. You can cancel at anytime.</small>
+					</div>
+
+					<div class="row">
+						<div class="col-md-8">
+							<label>Credit Card Number</label>
+							<input type="text" class="form-control">
+						</div>
+						<div class="col-md-4">
+							<img src="http://placehold.it/200x20">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4">
+							<label>Expiration</label>
+							<input type="text" class="form-control">
+						</div>
+						<div class="col-md-4">
+							<label>Billing Zipcode</label>
+							<input type="text" class="form-control">
+						</div>
+					</div>
+					
+					<hr>
+
+					<p><%= link_to "Start your 14 day free trial", "#", :class => 'btn btn-success btn-lg' %></p>
+					
+				</div>
+			</div>
+
+		</div>	
+	</div><!--8-->
 
 	<div class="col-md-4">
-		<img src="http://placehold.it/300x200" class="img-responsive">
-		<h4>About Bobs Hairdressers</h4>
-		<p>Welcome to float Zurich Here you can book your appointment online for float. The booked room is available then solely at your disposition. Our opening times are: daily from 9:30 - 22:30 except Wednesday from 14:00 clock - 22:00 clock float SAVINGS RATES apply from 1 - To 28 Feb. 2014 on the following dates: (In the booking confirmation, all prices and savings rates are listed again) CAPSULE: CHF 85 - (instead of CHF 120 -) Monday to Friday all day TANK for 1 person: CHF 105 - (instead of CHF 140 -) each Monday and Tuesday all day POOL for 2 persons: CH</p>
+		<h5>What is Scheduler?</h5>
+		<h5>How does it work with my accounting?</h5>
 
-		<h4>More information</h4>
-		<p>Website url</p>
-		<p>Facebook | Twitter | Instagram</p>
-	</div>
+		<h5>How do I cancel?</h5>
+		<span class="pull-left glyphicon glyphicon-ban-circle"></span>
+		<p>You can cancel or pause your plan at any time in your profile. No long term comittments or contracts what so ever.</p>
+	</div><!--4-->
+</div>
 
-
-</div><!-- row-->
