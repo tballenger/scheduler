@@ -55,6 +55,10 @@ class ContactsController < ApplicationController
 
     respond_to do |format|
       if @contact.save && @time_slot.update_attribute(:contact,@contact)
+        #clean previous purchase:
+        session[:event_id_selected] = nil
+        session[:time_slot_id_selected] = nil
+
         format.html { redirect_to root_path, notice: 'Appointment was successfully created.' }
         format.json { render action: 'show', status: :created, location: @contact }
       else

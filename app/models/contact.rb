@@ -20,14 +20,14 @@ class Contact < ActiveRecord::Base
         local_contact = Contact.find_by_email_address(contact.email_address)
         if !local_contact
           #create a new one
-          Contact.create!(:name => contact.name, :first_name => contact.first_name, :last_name => contact.last_name, :xero_uid => contact.contact_id, :email_address => contact.email_address)
+          Contact.create(:name => contact.name, :first_name => contact.first_name, :last_name => contact.last_name, :xero_uid => contact.contact_id, :email_address => contact.email_address)
         end
       end
       if local_contact
         #update local information
         local_contact.update_attributes(:name => contact.name, :first_name => contact.first_name, :last_name => contact.last_name, :xero_uid => contact.contact_id, :email_address => contact.email_address)
 
-        #Upload bills
+        #Upload bills start  #TODO: move to a private method for avoid duplication
         local_contact.time_slots.where(:billed => false).each do |time_slot|
           #generate billing
           invoice = xero.Invoice.build(:contact => contact, :type => 'ACCREC')
@@ -38,6 +38,7 @@ class Contact < ActiveRecord::Base
             time_slot.update_attribute(:billed,true)
           end
         end
+        #Upload bills end
 
       end
 
@@ -58,11 +59,43 @@ class Contact < ActiveRecord::Base
         remote_contact.save
       else
         #TODO: try to update contact from local data
-        #remote_contact = xero.Contact.find(contact.xero_uid)
+        remote_contact = xero.Contact.find(contact.xero_uid)
         #contact.name = "Another Name Change"
         #remote_contact.save
 
+        #Upload bills start  #TODO: move to a private method for avoid duplication
+        contact.time_slots.where(:billed => false).each do |time_slot|
+          #generate billing
+          invoice = xero.Invoice.build(:contact => remote_contact, :type => 'ACCREC')
+          line_item = invoice.add_line_item({:description => time_slot.event.title , :quantity => 1, :unit_amount => time_slot.event.service.price, :tax_amount => 0.0, :account_code => 200})
+
+          if invoice.save
+            #billing made
+            time_slot.update_attribute(:billed,true)
+          end
+        end
+        #Upload bills end
+
       end
+
+      remote_contact = xero.Contact.find(contact.xero_uid)
+      #contact.name = "Another Name Change"
+      #remote_contact.save
+
+      #Upload bills start  #TODO: move to a private method for avoid duplication
+      contact.time_slots.where(:billed => false).each do |time_slot|
+        #generate billing
+        invoice = xero.Invoice.build(:contact => remote_contact, :type => 'ACCREC')
+        line_item = invoice.add_line_item({:description => time_slot.event.title , :quantity => 1, :unit_amount => time_slot.event.service.price, :tax_amount => 0.0, :account_code => 200})
+
+        if invoice.save
+          #billing made
+          time_slot.update_attribute(:billed,true)
+        end
+      end
+      #Upload bills end
+
+
     end
 
 

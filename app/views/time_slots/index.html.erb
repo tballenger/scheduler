@@ -7,6 +7,7 @@
       <th>Ends at</th>
       <th>Event</th>
       <th>Purchased to</th>
+      <th>Billed</th>
       <th></th>
       <th></th>
       <th></th>
@@ -16,10 +17,11 @@
   <tbody>
     <% @time_slots.each do |time_slot| %>
       <tr>
-        <td><%= parse_datetime(time_slot.starts_at) %></td>
-        <td><%= parse_datetime(time_slot.ends_at) %></td>
-        <td><%= time_slot.event && time_slot.event.title %></td>
-        <td><%= time_slot.contact && time_slot.contact.email_address || ' free ' %></td>
+        <td><%= parse_datetime(time_slot.starts_at) %> &nbsp;</td>
+        <td><%= parse_datetime(time_slot.ends_at) %> &nbsp;</td>
+        <td><%= time_slot.event && time_slot.event.title %> &nbsp;</td>
+        <td><%= time_slot.contact && time_slot.contact.email_address || ' free ' %>&nbsp;</td>
+        <td><%= time_slot.billed? %>&nbsp;</td>
         <td><%= link_to 'Show', time_slot %></td>
         <td><%= link_to 'Edit', edit_time_slot_path(time_slot) %></td>
         <td><%= link_to 'Destroy', time_slot, method: :delete, data: { confirm: 'Are you sure?' } %></td>

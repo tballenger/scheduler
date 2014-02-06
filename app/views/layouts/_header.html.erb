@@ -11,10 +11,12 @@
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav navbar-right">
+            <li><%= link_to "Logout", xero_session_destroy_path %></li>
             <li><%= link_to "Home", root_path %></li>
+            <li><%= link_to "Sync", synchronize_contacts_path %></li>
             <li><%= link_to "About", about_path %></li>
             <li class="<%= controller_name == 'services' ? 'active' : '' %>"><%= link_to "Services", services_path %></li>
-            <li class="<%= controller_name == 'time_slots' ? 'active' : '' %>"><%= link_to 'Time Slots', time_slots_path %></li>
+            <li class="<%= controller_name == 'time_slots' ? 'active' : '' %>"><%= link_to 'T.Slots', time_slots_path %></li>
             <li class="<%= controller_name == 'contacts' && action_name == 'index' ? 'active' : '' %>"><%= link_to "Contacts", contacts_path %></li>
             <li class="<%= controller_name == 'events' ? 'active' : '' %>"><%= link_to "Events", events_path %></li>
             <li class="<%= controller_name == 'calendar' ? 'active' : '' %>"><%= link_to "Calendar", calendar_path%></li>
