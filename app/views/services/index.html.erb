@@ -2,7 +2,7 @@
   <div class="col-md-12">
     <h1>Bobs Hairdressers</h1>
     <p class="lead">Please select a service</p>
-    
+
   </div>
 </div>
 
@@ -10,39 +10,42 @@
   <div class="col-md-8">
     <div class="services-list">
       <% @services.each do |service| %>
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <div class="row">
-              <div class="col-md-8">
-                <h1><%= service.name %></h1>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <div class="row">
+                <div class="col-md-8">
+                  <h1><%= service.name %></h1>
+                </div>
+                <div class="col-md-4">
+                  <%= link_to "Select", service_path(service), :class => "btn btn-primary btn-block" %>
+                </div>
               </div>
-              <div class="col-md-4">
-                 <%= link_to "Select", service_path(service), :class => "btn btn-primary btn-block" %>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-6 description">
+                  <small>Description</small>
+                  <p class="list-group-item-text"><%= service.description %></p>
+                </div>
+                <div class="col-md-3">
+                  <small>Price</small>
+                  <p class="price lead"> <%= number_to_currency service.price %></p>
+                </div>
+                <div class="col-md-3">
+                  <small>Duration</small>
+                  <p class="duration lead"><%= service.minutes_duration %> minutes</p>
+                </div>
               </div>
             </div>
           </div>
-          <div class="panel-body">
-            <div class="row">
-              <div class="col-md-6 description">
-                <small>Description</small>
-                <p class="list-group-item-text"><%= service.description %></p>
-              </div>
-              <div class="col-md-3">
-                <small>Price</small>
-                <p class="price lead"> <%= number_to_currency service.price %></p>
-              </div>
-              <div class="col-md-3">
-                <small>Duration</small>
-                <p class="duration lead"><%= service.minutes_duration %> minutes</p>
-              </div>
-            </div>
-          </div>
-        </div>
       <% end %>
     </div>
-    <div class="col-md-4">
-      <%= link_to 'New Service', new_service_path, class: 'btn btn-info btn-lg btn-block' %>
-    </div>
+    <% if user_signed_in? %>
+        <div class="col-md-4">
+          <%= link_to 'New Service', new_service_path, class: 'btn btn-info btn-lg btn-block' %>
+        </div>
+    <%end%>
+
   </div>
 
   <div class="col-md-4">
