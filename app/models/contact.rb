@@ -5,6 +5,8 @@ class Contact < ActiveRecord::Base
   validates :email_address, :presence => true, :uniqueness => true
   before_save :check_and_set_name
 
+  has_many :time_slots
+
   def self.synchronize(xero)
     contacts = xero.Contact.all(:order => 'Name')
     emails_list = []

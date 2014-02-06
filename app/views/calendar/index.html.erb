@@ -32,22 +32,22 @@
 <hr>
 
 <%if @event %>
-<div class="row">
-  <div class="col-md-6">
-    <div class="selected-service">
-      <small>Selected service</small>
-      <h4><%= @event.service.name %></h4>
-      <p><%= @event.service.description %></p>
-      <p>
-        <span class="price"> <%= number_to_currency @event.service.price %></span>
-        <span class="duration"><%= @event.service.minutes_duration %> minutes</span>
-      </p>
-      <p><a href="#" class="btn btn-default">Change</a></p>
-    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="selected-service">
+          <small>Selected service</small>
+          <h4><%= @event.service.name %></h4>
+          <p><%= @event.service.description %></p>
+          <p>
+            <span class="price"> <%= number_to_currency @event.service.price %></span>
+            <span class="duration"><%= @event.service.minutes_duration %> minutes</span>
+          </p>
+          <p><a href="#" class="btn btn-default">Change</a></p>
+        </div>
 
-  </div>
+      </div>
 
-</div><!--row-->
+    </div><!--row-->
 <%end%>
 
 <script type="text/javascript">

@@ -1,7 +1,7 @@
 class ContactsController < ApplicationController
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
 
-  before_filter :find_event_and_slot, only: [:new]
+  before_filter :find_event_and_slot, only: [:new,:create]
 
   # GET /contacts
   # GET /contacts.json
@@ -42,8 +42,6 @@ class ContactsController < ApplicationController
   # GET /contacts/new
   def new
     @contact = Contact.new
-
-
   end
 
   # GET /contacts/1/edit
@@ -56,8 +54,8 @@ class ContactsController < ApplicationController
     @contact = Contact.new(contact_params)
 
     respond_to do |format|
-      if @contact.save
-        format.html { redirect_to contacts_path, notice: 'Contact was successfully created.' }
+      if @contact.save && @time_slot.update_attribute(:contact,@contact)
+        format.html { redirect_to root_path, notice: 'Appointment was successfully created.' }
         format.json { render action: 'show', status: :created, location: @contact }
       else
         format.html { render action: 'new' }
