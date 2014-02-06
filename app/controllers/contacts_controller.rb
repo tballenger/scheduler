@@ -1,6 +1,8 @@
 class ContactsController < ApplicationController
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
 
+  before_filter :find_event_and_slot, only: [:new]
+
   # GET /contacts
   # GET /contacts.json
   def index
@@ -40,6 +42,8 @@ class ContactsController < ApplicationController
   # GET /contacts/new
   def new
     @contact = Contact.new
+
+
   end
 
   # GET /contacts/1/edit
@@ -87,13 +91,24 @@ class ContactsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_contact
-      @contact = Contact.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_contact
+    @contact = Contact.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def contact_params
-      params.require(:contact).permit(:name, :first_name, :last_name, :email_address, :phone_number, :xero_uid, :user_id)
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def contact_params
+    params.require(:contact).permit(:name, :first_name, :last_name, :email_address, :phone_number, :xero_uid, :user_id)
+  end
+
+  def find_event_and_slot
+    begin
+      @event = Event.find(session[:event_id_selected]) if session[:event_id_selected].present?
+      @time_slot = TimeSlot.find(session[:time_slot_id_selected]) if session[:time_slot_id_selected].present?
+    rescue
+      session[:event_id_selected] = nil
+      session[:time_slot_id_selected] = nil
     end
+  end
+
 end

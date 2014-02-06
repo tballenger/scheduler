@@ -9,12 +9,12 @@
   <div class="col-md-8">
     <div class="list-group">
       <% @services.each do |service| %>
-          <a href="#" class="list-group-item ">
+          <a href="<%= service_path(service) %>" class="list-group-item ">
             <p class="list-group-item-text select pull-right">Select</p>
             <h4 class="list-group-item-heading"><%= service.name %></h4>
             <p class="list-group-item-text"><%= service.description %></p>
             <p class="list-group-item-text">
-              <span class="price">$ <%= service.price %></span>
+              <span class="price"> <%= number_to_currency service.price %></span>
               <span class="duration"><%= service.minutes_duration %> minutes</span>
             </p>
           </a>

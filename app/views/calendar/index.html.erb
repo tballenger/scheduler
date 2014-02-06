@@ -14,14 +14,14 @@
   <div class="col-md-4">
     <small>Selected Date</small>
     <%if @event %>
-        <h5> <%= "#{@event.title}" %></h5>
-        <h4> <%= "#{ parse_datetime(@event.starts_at)}  to #{parse_datetime(@event.ends_at)}" %></h4>
+        <h5><%= "#{@event.title}" %></h5>
+        <h4><%= "From #{ parse_datetime(@event.starts_at)}" %></h4>
         <div class="list-group">
           <% @event.time_slots.each do |time_slot| %>
-              <a href="<%= time_slot_path(time_slot) %>" class="list-group-item <%= session[:time_slot_id_selected] == time_slot.id ? 'active' : '' %>"><%= "#{ parse_time(time_slot.starts_at)} to #{parse_time(time_slot.ends_at)}" %></a>
+              <a href="<%= time_slot_path(time_slot) %>" class="list-group-item <%= @time_slot == time_slot ? 'active' : '' %>"><%= "#{ parse_time(time_slot.starts_at)} to #{parse_time(time_slot.ends_at)}" %></a>
           <%end%>
         </div>
-        <p><%= link_to "Confirm", new_contact_path , :class => "btn btn-success btn-lg btn-block #{session[:time_slot_id_selected] ? '' : 'disabled' }" %></p>
+        <p><%= link_to "Confirm", new_contact_path , :class => "btn btn-success btn-lg btn-block #{@time_slot ? '' : 'disabled' }" %></p>
         <p>Times in Pacific Standard Time (PST)</p>
     <%else%>
         <h4>No Event Selected</h4>
@@ -31,15 +31,16 @@
 
 <hr>
 
+<%if @event %>
 <div class="row">
   <div class="col-md-6">
     <div class="selected-service">
       <small>Selected service</small>
-      <h4>List group item heading</h4>
-      <p>Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+      <h4><%= @event.service.name %></h4>
+      <p><%= @event.service.description %></p>
       <p>
-        <span class="price">$100.00</span>
-        <span class="duration">90 minutes</span>
+        <span class="price"> <%= number_to_currency @event.service.price %></span>
+        <span class="duration"><%= @event.service.minutes_duration %> minutes</span>
       </p>
       <p><a href="#" class="btn btn-default">Change</a></p>
     </div>
@@ -47,7 +48,7 @@
   </div>
 
 </div><!--row-->
-
+<%end%>
 
 <script type="text/javascript">
 
