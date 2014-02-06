@@ -21,7 +21,7 @@ class XeroSessionController < ApplicationController
 
     session.delete(:request_token)
     session.delete(:request_secret)
-    redirect_to more_path
+    redirect_to contacts_path
   end
 
   def destroy

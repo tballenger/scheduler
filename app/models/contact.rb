@@ -8,9 +8,11 @@ class Contact < ActiveRecord::Base
   has_many :time_slots
 
   def self.synchronize(xero)
-    contacts = xero.Contact.all(:order => 'Name')
+    xero_contacts = xero.Contact.all(:order => 'Name')
     emails_list = []
-    contacts.entries.each do |contact|
+
+    #add Xero contacts to local database -------------------------------------
+    xero_contacts.entries.each do |contact|
       #try to find by guid
       local_contact = Contact.find_by_xero_uid(contact.contact_id)
       if !local_contact
@@ -21,7 +23,17 @@ class Contact < ActiveRecord::Base
           Contact.create!(:name => contact.name, :first_name => contact.first_name, :last_name => contact.last_name, :xero_uid => contact.contact_id, :email_address => contact.email_address)
         end
       end
+      if local_contact
+        #update local information
+         local_contact.update_attributes(:name => contact.name, :first_name => contact.first_name, :last_name => contact.last_name, :xero_uid => contact.contact_id, :email_address => contact.email_address)
+      end
+
     end
+
+    #add Xero contacts from local contacts -------------------------------------
+
+
+
   end
 
   private
