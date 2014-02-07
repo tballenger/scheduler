@@ -22,11 +22,11 @@ class ApplicationController < ActionController::Base
   end
 
   def get_business_name
-    @user && @user.business_name || 'Your Business'
+    @business && @business.business_name || 'Your Business'
   end
 
   def get_business_description
-    @user && @user.business_description || 'Your Business Description'
+    @business && @business.business_description || 'Your Business Description'
   end
 
   private
@@ -43,9 +43,9 @@ class ApplicationController < ActionController::Base
   def find_business
     begin
       session[:username] = params[:username] if params[:username].present?
-      @user = User.where(:username => session[:username]).first if session[:username].present?
+      @business = User.where(:username => session[:username]).first if session[:username].present?
     rescue
-      @user = nil
+      @business = nil
       session[:username] = nil
     end
   end

@@ -5,4 +5,6 @@ class Service < ActiveRecord::Base
 
   has_many :events, dependent: :destroy
 
+  scope :per_user, ->(user_id) { where("services.user_id = ? ", user_id )} #.includes(:proposals)}
+
 end
