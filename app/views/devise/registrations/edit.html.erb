@@ -17,16 +17,12 @@
       <div class="col-md-8">
         <div class="row">
           <div class="row">
-            <div class="center new-number col-md-1">
-              <span>1</span>
-            </div>
             <div class="step col-md-11">
-              <h3>Custom name</h3>
+              <h3>Pick your custom name</h3>
               <p>Choose your unique business name. Your customers will be able to view your services and book available times online.</p>
               <div class="input-group">
                 <span class="input-group-addon">scheduler.com/</span>
                 <%= f.text_field :username,  :class => 'form-control', :placeholder => 'Username', :required => 'true' %>
-
               </div>
             </div>
           </div>
@@ -34,11 +30,44 @@
           <hr>
 
           <div class="row">
-            <div class="center new-number col-md-1">
-              <span>2</span>
-            </div>
             <div class="step col-md-11">
-              <h3>Login</h3>
+              <h3>Business information </h3>
+              <p>Please add your public business information</p>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <label>Email address</label>
+                  <%= f.email_field :email, :autofocus => true, :class => 'form-control', :required => 'true' %>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Create password <i> (leave blank if you don't want to change it)</i></label>
+                  <%= f.password_field :password, :class => 'form-control' %>
+                </div>
+                <div class="col-md-6">
+                  <label>Confirm Password</label>
+                  <%= f.password_field :password_confirmation, :class => 'form-control' %>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Current password <i> (we need your current password to confirm your changes)</i></label>
+                  <%= f.password_field :current_password, :class => 'form-control' %>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+          <hr>
+
+          <div class="row">
+            <div class="step col-md-11">
+              <h3>Edit Login</h3>
               <p>Please enter a valid email address for your business and create a password</p>
 
               <div class="row">
@@ -73,9 +102,6 @@
           <hr>
 
           <div class="row">
-            <div class="center new-number col-md-1">
-              <span>3</span>
-            </div>
             <div class="step col-md-11">
               <h3>Edit your billing information</h3>
               <div class="alert alert-warning">
