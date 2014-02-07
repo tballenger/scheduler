@@ -1,28 +1,29 @@
 <section>
-<div class="center">
-<h1>Simple Appointment Scheduling</h1>
-<p class="lead">Let your customers view, book and pay for services and appointments. <br>All integrated seamlessly with your accounting platform.</p>
-</div>
+  <div class="center">
+    <h1>Simple Appointment Scheduling</h1>
+    <p class="lead">Let your customers view, book and pay for services and appointments. <br>All integrated seamlessly with your accounting platform.</p>
+  </div>
 </section>
 
 <section>
-<div class="row center">
-  <h3>Get Started</h3>
-  <div class="col-md-12 well">
-    <h4>Pick a custom URL & connect to your accounting platform:</h4>
-  
-  <%= form_tag(xero_session_new_path) do %>
-      <div class="col-md-offset-2 col-md-6">
-        <div class="input-group input-group-lg">
-          <span class="input-group-addon">scheduler.com/</span>
-          <%= text_field_tag 'user_name', session[:user_name], class: 'form-control', placeholder: 'Username', :required => 'true' %>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <%=submit_tag 'Connect to Xero', class: 'btn btn-primary btn-lg btn-block' %>
-      </div>
-  <%end%>
-</div>
+  <div class="row center">
+    <h3>Get Started</h3>
+    <div class="col-md-12 well">
+      <h4>Pick a custom URL & connect to your accounting platform:</h4>
+
+      <%= form_tag(xero_session_new_path) do %>
+          <div class="col-md-offset-2 col-md-6">
+            <div class="input-group input-group-lg">
+              <span class="input-group-addon">scheduler.com/</span>
+              <%= text_field_tag 'user_name', (current_user && current_user.username) || session[:user_name], class: 'form-control', placeholder: 'Username', :required => 'true' %>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <%=submit_tag 'Connect to Xero', class: 'btn btn-primary btn-lg btn-block' %>
+          </div>
+      <%end%>
+    </div>
+  </div>
 </section>
 
 <div class="row">
