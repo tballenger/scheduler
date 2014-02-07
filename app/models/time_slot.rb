@@ -9,9 +9,19 @@ class TimeSlot < ActiveRecord::Base
 
   belongs_to :contact
 
+  before_update :check_token
+
 
   def free?
     !self.contact
+  end
+
+  private
+
+  def check_token
+    if self.contact && !self.token
+      self.token = Random.rand(1000...10000).to_s
+    end
   end
 
 end

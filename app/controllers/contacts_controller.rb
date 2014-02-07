@@ -52,11 +52,7 @@ class ContactsController < ApplicationController
 
     respond_to do |format|
       if @contact.save && @time_slot.update_attribute(:contact,@contact)
-        #clean previous purchase:
-        session[:event_id_selected] = nil
-        session[:time_slot_id_selected] = nil
-
-        format.html { redirect_to root_path, notice: 'Appointment was successfully created.' }
+        format.html { redirect_to confirmation_path, notice: 'Appointment was successfully created.' }
         format.json { render action: 'show', status: :created, location: @contact }
       else
         format.html { render action: 'new' }
@@ -100,14 +96,6 @@ class ContactsController < ApplicationController
     params.require(:contact).permit(:name, :first_name, :last_name, :email_address, :phone_number, :xero_uid, :user_id)
   end
 
-  def find_event_and_slot
-    begin
-      @event = Event.find(session[:event_id_selected]) if session[:event_id_selected].present?
-      @time_slot = TimeSlot.find(session[:time_slot_id_selected]) if session[:time_slot_id_selected].present?
-    rescue
-      session[:event_id_selected] = nil
-      session[:time_slot_id_selected] = nil
-    end
-  end
+
 
 end

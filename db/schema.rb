@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140206220855) do
+ActiveRecord::Schema.define(version: 20140207021151) do
 
   create_table "contacts", force: true do |t|
     t.string   "name",          null: false
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 20140206220855) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "billed",     default: false
+    t.string   "token"
   end
 
   create_table "users", force: true do |t|

@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-md-10">
 		<h1>Bobs Hairdressers</h1>
-		<p class="lead">Thank you for scheduling your appointment. Your confirmation code is 4342321.</p>
+		<p class="lead">Thank you for scheduling your appointment. Your confirmation code is <%= @time_slot && @time_slot.token %> .</p>
 	</div>
 </div>
 

@@ -1,4 +1,7 @@
 class PagesController < ApplicationController
+
+  before_filter :find_event_and_slot, only: [:confirmation]
+
   def home
   end
 

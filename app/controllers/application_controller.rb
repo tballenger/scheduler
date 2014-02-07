@@ -29,4 +29,14 @@ class ApplicationController < ActionController::Base
     ajax_request_types = ['text/javascript', 'application/json', 'text/xml']
     request.accepts.sort! { |x, y| ajax_request_types.include?(y.to_s) ? 1 : -1 } if request.xhr?
   end
+
+  def find_event_and_slot
+    begin
+      @event = Event.find(session[:event_id_selected]) if session[:event_id_selected].present?
+      @time_slot = TimeSlot.find(session[:time_slot_id_selected]) if session[:time_slot_id_selected].present?
+    rescue
+      session[:event_id_selected] = nil
+      session[:time_slot_id_selected] = nil
+    end
+  end
 end
