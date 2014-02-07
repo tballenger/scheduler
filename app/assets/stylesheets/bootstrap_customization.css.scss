@@ -61,6 +61,13 @@ h1.panel-title{
 .fc-header-title h2{
 	font-size: 24px;
 }
+
+//this class is added if user select the event
+.selected-event{
+  //need some customization like color
+  font-size: 16px;
+}
+
 //new
 .new-number{
 	height: 40px;
@@ -77,3 +84,6 @@ h1.panel-title{
 .step h3{
 	margin-top: 5px;
 }
+
+
+
