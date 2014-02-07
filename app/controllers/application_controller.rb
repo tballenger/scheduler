@@ -3,8 +3,10 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  before_filter :correct_safari_and_ie_accept_headers
+  before_filter :correct_safari_and_ie_accept_headers, :find_business
   after_filter :set_xhr_flash
+
+  helper_method :get_business_name
 
 
 
@@ -19,6 +21,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def get_business_name
+    @user && @user.business_name || 'Your Business'
+  end
+
+  def get_business_description
+    @user && @user.business_description || 'Your Business Description'
+  end
+
   private
 
   def set_xhr_flash
@@ -30,6 +40,16 @@ class ApplicationController < ActionController::Base
     request.accepts.sort! { |x, y| ajax_request_types.include?(y.to_s) ? 1 : -1 } if request.xhr?
   end
 
+  def find_business
+    begin
+      session[:username] = params[:username] if params[:username].present?
+      @user = User.where(:username => session[:username]).first if session[:username].present?
+    rescue
+      @user = nil
+      session[:username] = nil
+    end
+  end
+
   def find_event_and_slot
     begin
       @event = Event.find(session[:event_id_selected]) if session[:event_id_selected].present?
@@ -39,4 +59,6 @@ class ApplicationController < ActionController::Base
       session[:time_slot_id_selected] = nil
     end
   end
+
+
 end
