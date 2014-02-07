@@ -1,109 +1,108 @@
 <div class="row">
-	<div class="col-md-10">
-		<h1>Bobs Hairdressers</h1>
-		<p class="lead">Thank you for scheduling your appointment. Your confirmation code is <%= @time_slot && @time_slot.token %> .</p>
-	</div>
+  <div class="col-md-10">
+    <h1>Bobs Hairdressers</h1>
+    <p class="lead">Thank you for scheduling your appointment. Your confirmation code is <%= @time_slot && @time_slot.token %> .</p>
+  </div>
 </div>
 
 
 
 <div class="row">
-	<div class="col-md-6">
-		<div class="selected-service">
-		<small>Selected service</small>
-		<h4>List group item heading</h4>
-		<p>Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-		<p>
-		<span class="price">$100.00</span>
-		<span class="duration">90 minutes</span>
-		</p>
-		</div>
+  <div class="col-md-6">
+    <div class="selected-service">
+      <small>Selected service</small>
+      <h4><%= @event && @event.title %></h4>
+      <p><%= @event && @event.service && @event.service.description %></p>
+      <p>
+        <span class="price"><%= number_to_currency @event.service.price %></span>
+        <span class="duration"><%= @event.service.minutes_duration %> minutes</span>
+      </p>
+    </div>
+  </div>
 
-	</div>
+  <div class="col-md-6">
+    <div class="selected-service">
+      <small>Selected date</small>
+      <h4><%= "#{ parse_datetime(@time_slot.starts_at)} to #{parse_time(@time_slot.ends_at)}" %></h4>
+      <p>We will email you one day before your appointment to remind you!</p>
+    </div>
 
-	<div class="col-md-6">
-		<div class="selected-service">
-		<small>Selected date</small>
-		<h4>April 2, 2013 11am - 12pm</h4>
-		<p>We will email you one day before your appointment to remind you!</p>
-	</div>
-
-	</div>
+  </div>
 </div><!--row-->
 
 <div class="row">
-	<div class="col-md-12">
-		<div class="well">
-			<div class="row">
-				<div class="col-md-6">
-					<h4>Bobs Haidressers</h4>
-					<p>311 Main Street, Suite 300, Los Angeles, CA 90230</p>
-				</div>
-				<div class="col-md-6">
-					<h4>310-310-3100</h4>
-					<p>contact@bobhairs.com</p>
-				</div>
-			</div>
-		</div>
-	</div>
+  <div class="col-md-12">
+    <div class="well">
+      <div class="row">
+        <div class="col-md-6">
+          <h4>Bobs Haidressers</h4>
+          <p>311 Main Street, Suite 300, Los Angeles, CA 90230</p>
+        </div>
+        <div class="col-md-6">
+          <h4>310-310-3100</h4>
+          <p>contact@bobhairs.com</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div><!--row-->
 
 <div class="row">
-	<div class="col-md-12">
-		<h3>Your details</h3>
-	</div>
-	  <div class="col-md-3">
-	  	<label>First Name</label>
-	    <p>Taylor</p>
-	  </div>
-	  <div class="col-md-3">
-	    <label>Last Name</label>
-	    <p>Ballenger</p>
-	  </div>
-	  <div class="col-md-3">
-	  	<label>Email Address</label>
-	    <p>taylorballenger@gmail.com</p>
-	  </div>
-	  <div class="col-md-3">
-	  	<label>Phone Number</label>
-	  	<p>310-310-3100</p>
-	  </div>
+  <div class="col-md-12">
+    <h3>Your details</h3>
+  </div>
+  <div class="col-md-3">
+    <label>First Name</label>
+    <p><%= @contact && @contact.first_name %></p>
+  </div>
+  <div class="col-md-3">
+    <label>Last Name</label>
+    <p><%= @contact && @contact.last_name %></p>
+  </div>
+  <div class="col-md-3">
+    <label>Email Address</label>
+    <p><%= @contact && @contact.email_address %></p>
+  </div>
+  <div class="col-md-3">
+    <label>Phone Number</label>
+    <p><%= @contact && @contact.phone_number %></p>
+  </div>
 </div>
 
 <hr>
 
 <div class="row">
-	<div class="col-md-12 payment-details">
-	<h3>Payment Method</h3>
-	</div>
-	<div class="col-md-3">
-	  	<label>Amount Charged</label>
-	  	<p>$100.00</p>
-	  </div>
-	 <div class="col-md-3">
-	  	<label>Credit Card Number</label>
-	  	<p>XXXX-XXXX-XXXX-3012</p>
-	  </div>
-	  <div class="col-md-3">
-	    <label>Exipration Date</label>
-	    <p>3/12/2015</p>
-	  </div>
-	  <div class="col-md-3">
-	  	<label>Billing Zip Code</label>
-	    <p>90230</p>
-	  </div>
+  <div class="col-md-12 payment-details">
+    <h3>Payment Method</h3>
+  </div>
+  <div class="col-md-3">
+    <label>Amount Charged</label>
+    <p><%= number_to_currency @event.service.price if @event %></p>
+  </div>
+  <div class="col-md-3">
+    <label>Credit Card Number</label>
+    <p>XXXX-XXXX-XXXX-3012</p>
+  </div>
+  <div class="col-md-3">
+    <label>Exipration Date</label>
+    <p>3/12/2015</p>
+  </div>
+  <div class="col-md-3">
+    <label>Billing Zip Code</label>
+    <p>90230</p>
+  </div>
 </div>
 
 <hr>
 
 <div class="row">
-	<div class="col-md-4">
-	<p><%= link_to "Print this page", "#", :class => "btn btn-default btn-lg btn-block" %></p>
-	</div>
-	<div class="col-md-4">
-	<p><%= link_to "Change appointment", "#", :class => "btn btn-info btn-lg btn-block" %></p>
-	</div>
-	<div class="col-md-4">
-	<p><%= link_to "Cancel appointment", "#", :class => "btn btn-danger btn-lg btn-block" %></p>
-	</div>
+  <div class="col-md-4">
+    <p><%= link_to "Print this page", "#", :class => "btn btn-default btn-lg btn-block" %></p>
+  </div>
+  <div class="col-md-4">
+    <p><%= link_to "Change appointment", "#", :class => "btn btn-info btn-lg btn-block" %></p>
+  </div>
+  <div class="col-md-4">
+    <p><%= link_to "Cancel appointment", "#", :class => "btn btn-danger btn-lg btn-block" %></p>
+  </div>
 </div>

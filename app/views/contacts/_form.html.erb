@@ -107,7 +107,7 @@
     <div class="row">
       <div class="col-md-4">
         <p><%= f.submit "Confirm appointment", :class => "btn btn-success btn-lg btn-block" %></p>
-        <p><small>Your appointment will be confirmed and your credit card will be charged $100.</small></p>
+        <p><small>Your appointment will be confirmed and your credit card will be charged <%= number_to_currency @event.service.price if @event %>.</small></p>
       </div>
     </div>
 

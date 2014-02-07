@@ -49,9 +49,9 @@ class ContactsController < ApplicationController
   # POST /contacts.json
   def create
     @contact = Contact.new(contact_params)
-
     respond_to do |format|
       if @contact.save && @time_slot.update_attribute(:contact,@contact)
+        session[:contact_id] = @contact.id
         format.html { redirect_to confirmation_path, notice: 'Appointment was successfully created.' }
         format.json { render action: 'show', status: :created, location: @contact }
       else

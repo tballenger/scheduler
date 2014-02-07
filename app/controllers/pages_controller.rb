@@ -15,6 +15,7 @@ class PagesController < ApplicationController
   end
 
   def confirmation
+    @contact = Contact.find(session[:contact_id]) if session[:contact_id].present?
   end
 
 end

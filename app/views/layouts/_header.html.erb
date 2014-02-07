@@ -41,7 +41,7 @@
         <!--<li><%= link_to "More", more_path %></li> moved to calendar  -->
         <!--<li><%= link_to "EvenMore", evenmore_path %></li> moved to contacts  -->
         <li class="<%= controller_name == 'contacts' && action_name == 'new'  ? 'active' : '' %>"><%= link_to "Your Info", new_contact_path %></li>
-        <li><%= link_to "Confirmation", confirmation_path %></li>
+        <li class="<%= controller_name == 'pages' && action_name == 'confirmation'  ? 'active' : '' %>"><%= link_to "Confirmation", confirmation_path %></li>
       </ul>
     </div><!--/.nav-collapse -->
   </div>
