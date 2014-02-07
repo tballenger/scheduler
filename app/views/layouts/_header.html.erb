@@ -26,6 +26,7 @@
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
+            <li class="<%= controller_name == 'registrations' ? 'active' : '' %>"><%= link_to 'Edit profile', edit_user_registration_path %></li>
             <li><%= link_to "Logout", xero_session_destroy_path %></li>
             <li><%= link_to "Sync", synchronize_contacts_path %></li>
             <li class="<%= controller_name == 'time_slots' ? 'active' : '' %>"><%= link_to 'T.Slots', time_slots_path %></li>
