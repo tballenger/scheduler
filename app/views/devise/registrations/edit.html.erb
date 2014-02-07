@@ -31,33 +31,40 @@
 
           <div class="row">
             <div class="step col-md-11">
-              <h3>Business information </h3>
+              <h3>Public Business information </h3>
               <p>Please add your public business information</p>
 
               <div class="row">
                 <div class="col-md-12">
-                  <label>Email address</label>
-                  <%= f.email_field :email, :autofocus => true, :class => 'form-control', :required => 'true' %>
+                  <label>Business name</label>
+                  <%= f.text_field :business_name, :class => 'form-control' %>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <label>Business Description</label>
+                  <%= f.text_field :business_description, :class => 'form-control' %>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <label>Business Address</label>
+                  <%= f.text_field :business_address, :class => 'form-control' %>
                 </div>
               </div>
 
               <div class="row">
                 <div class="col-md-6">
-                  <label>Create password <i> (leave blank if you don't want to change it)</i></label>
-                  <%= f.password_field :password, :class => 'form-control' %>
-                </div>
-                <div class="col-md-6">
-                  <label>Confirm Password</label>
-                  <%= f.password_field :password_confirmation, :class => 'form-control' %>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-md-6">
-                  <label>Current password <i> (we need your current password to confirm your changes)</i></label>
-                  <%= f.password_field :current_password, :class => 'form-control' %>
+                  <label>Business Phone</label>
+                  <%= f.text_field :business_phone, :class => 'form-control' %>
                 </div>
 
+                <div class="col-md-6">
+                  <label>Business Email</label>
+                  <%= f.email_field :business_email, :class => 'form-control' %>
+                </div>
               </div>
 
             </div>
