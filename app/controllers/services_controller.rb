@@ -4,6 +4,9 @@ class ServicesController < ApplicationController
   # GET /services
   # GET /services.json
   def index
+    session[:service_id_selected] = nil
+    session[:event_id_selected] = nil
+    #TODO: add filter by User
     @services = Service.all
   end
 

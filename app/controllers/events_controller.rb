@@ -4,10 +4,16 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    #@events = Event.all
-    @events = Event.scoped
-    @events = @events.after(params['start']) if (params['start'])
-    @events = @events.before(params['end']) if (params['end'])
+    if session[:service_id_selected].present?
+      #Events filtered by Service
+      @events =  Event.scoped.where(:service_id => session[:service_id_selected])
+      @events = @events.after(params['start']).where(:service_id => session[:service_id_selected]) if (params['start'])
+      @events = @events.before(params['end']).where(:service_id => session[:service_id_selected]) if (params['end'])
+    else
+      @events = Event.scoped
+      @events = @events.after(params['start']) if (params['start'])
+      @events = @events.before(params['end']) if (params['end'])
+    end
 
     respond_to do |format|
       format.html # index.html.erb
