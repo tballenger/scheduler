@@ -25,7 +25,8 @@ class Event < ActiveRecord::Base
         :end => ends_at.rfc822,
         :allDay => self.all_day,
         :recurring => false,
-        :url => Rails.application.routes.url_helpers.event_path(id)
+        :url => Rails.application.routes.url_helpers.event_path(id),
+        :selected => self.is_selected?(options)
     }
 
   end
@@ -41,7 +42,9 @@ class Event < ActiveRecord::Base
     self.title
   end
 
-
+  def is_selected?(options = {})
+    options[:event_id_selected] == self.id
+  end
 
 
   private
