@@ -26,7 +26,7 @@ class Event < ActiveRecord::Base
         :allDay => self.all_day,
         :recurring => false,
         :url => Rails.application.routes.url_helpers.event_path(id),
-        :className => is_selected?(options) ? 'selected-event' : '' #here we can add customized class event selection
+        :className => is_selected?(options) ? 'fc-event-selected' : '' #here we can add customized class for event selection
     }
 
   end
