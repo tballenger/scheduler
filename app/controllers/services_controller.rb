@@ -32,7 +32,7 @@ class ServicesController < ApplicationController
   # POST /services.json
   def create
     @service = Service.new(service_params)
-
+    @service.user = current_user
     respond_to do |format|
       if @service.save
         format.html { redirect_to services_path, notice: 'Service was successfully created.' }

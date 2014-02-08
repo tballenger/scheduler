@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-md-12">
     <h1><%= get_business_name %></h1>
-    <p class="lead"><%= !@services.empty? ? 'Please select a service' : 'This business has no service available' %> </p>
+    <p class="lead"><%= !@services.empty? ? 'Please select a service' : 'This business does not have services available' %> </p>
   </div>
 </div>
 
@@ -49,8 +49,8 @@
 
   <div class="col-md-4">
     <img src="http://placehold.it/300x200" class="img-responsive">
-    <h4>About Bobs Hairdressers</h4>
-    <p>Description of the profile goes here. Should support markdown.</p>
+    <h4><%= "About #{get_business_name}" %></h4>
+    <p><%= "#{get_business_description}" %></p>
 
     <h4>More information</h4>
     <p>Website url</p>

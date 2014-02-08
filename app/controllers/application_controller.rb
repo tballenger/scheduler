@@ -6,8 +6,7 @@ class ApplicationController < ActionController::Base
   before_filter :correct_safari_and_ie_accept_headers, :find_business
   after_filter :set_xhr_flash
 
-  helper_method :get_business_name
-
+  helper_method :get_business_name, :get_business_description
 
 
   def get_xero_client
