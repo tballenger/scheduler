@@ -1,4 +1,7 @@
 class ContactsController < ApplicationController
+
+  before_filter :authenticate_user!, except: [:new,:create]
+
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
 
   before_filter :find_event_and_slot, only: [:new,:create]
@@ -6,7 +9,9 @@ class ContactsController < ApplicationController
   # GET /contacts
   # GET /contacts.json
   def index
-    @contacts = Contact.all
+    #@contacts = Contact.all
+    @contacts = current_user.contacts
+
     if session[:xero_auth] && $xero
       begin
         @remote_contacts = $xero.Contact.all(:order => 'Name')
@@ -24,7 +29,7 @@ class ContactsController < ApplicationController
   # GET /contacts.json
   def synchronize
     if session[:xero_auth] && $xero
-      Contact.synchronize($xero)
+      Contact.synchronize($xero,current_user)
     else
       redirect_to xero_reconnect_path and return
     end
@@ -49,6 +54,8 @@ class ContactsController < ApplicationController
   # POST /contacts.json
   def create
     @contact = Contact.new(contact_params)
+    @contact.user = @business #save the owner of the contact
+
     respond_to do |format|
       if @contact.save && @time_slot.update_attribute(:contact,@contact)
         session[:contact_id] = @contact.id
@@ -88,7 +95,7 @@ class ContactsController < ApplicationController
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_contact
-    @contact = Contact.find(params[:id])
+    @contact = current_user.contacts.find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

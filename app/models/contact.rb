@@ -7,7 +7,10 @@ class Contact < ActiveRecord::Base
 
   has_many :time_slots
 
-  def self.synchronize(xero)
+  belongs_to :user #owner of the contact = business owner
+
+
+  def self.synchronize(xero, current_user = nil)
     xero_contacts = xero.Contact.all(:order => 'Name')
 
 
@@ -20,12 +23,12 @@ class Contact < ActiveRecord::Base
         local_contact = Contact.find_by_email_address(contact.email_address)
         if !local_contact
           #create a new one
-          Contact.create(:name => contact.name, :first_name => contact.first_name, :last_name => contact.last_name, :xero_uid => contact.contact_id, :email_address => contact.email_address)
+          Contact.create(:name => contact.name, :first_name => contact.first_name, :last_name => contact.last_name, :xero_uid => contact.contact_id, :email_address => contact.email_address, :user => current_user)
         end
       end
       if local_contact
         #update local information
-        local_contact.update_attributes(:name => contact.name, :first_name => contact.first_name, :last_name => contact.last_name, :xero_uid => contact.contact_id, :email_address => contact.email_address)
+        local_contact.update_attributes(:name => contact.name, :first_name => contact.first_name, :last_name => contact.last_name, :xero_uid => contact.contact_id, :email_address => contact.email_address, :user => current_user)
 
         #Upload bills start  #TODO: move to a private method for avoid duplication
         local_contact.time_slots.where(:billed => false).each do |time_slot|

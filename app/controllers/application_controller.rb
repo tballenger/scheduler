@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   end
 
   def get_business_name
-    @business && @business.business_name || 'Your Business'
+    @business && @business.business_name || 'No Business found'
   end
 
   def get_business_description
@@ -39,7 +39,15 @@ class ApplicationController < ActionController::Base
   end
 
   def find_business
+
     begin
+      if current_user
+        #the user is logen in --> is the business owner
+        @business = current_user
+        session[:username] = params[:username] = current_user.business_name
+        return
+      end
+
       session[:username] = params[:username] if params[:username].present?
       if session[:username].present?
         #try to find user with username

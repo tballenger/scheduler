@@ -14,7 +14,7 @@
 
     <div class="field">
       <%= f.label :service %><br>
-      <%= collection_select(:event, :service_id, @business.services, :id, :name, :prompt => 'Please select Service') %>
+      <%= collection_select(:event, :service_id, @business && @business.services ||[], :id, :name, :prompt => 'Please select Service') %>
     </div>
 
     <!--

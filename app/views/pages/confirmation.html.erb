@@ -12,7 +12,7 @@
       <h4><%= @event && @event.title %></h4>
       <p><%= @event && @event.service && @event.service.description %></p>
       <p>
-        <span class="price"><%= number_to_currency @event.service.price %></span>
+        <span class="price"><%= number_to_currency @time_slot.price if @time_slot.price %></span>
         <span class="duration"><%= @event.service.minutes_duration %> minutes</span>
       </p>
     </div>
@@ -75,7 +75,7 @@
   </div>
   <div class="col-md-3">
     <label>Amount Charged</label>
-    <p><%= number_to_currency @event.service.price if @event %></p>
+    <p><%= number_to_currency @time_slot.price if  @time_slot.price %></p>
   </div>
   <div class="col-md-3">
     <label>Credit Card Number</label>

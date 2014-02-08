@@ -1,4 +1,7 @@
 class EventsController < ApplicationController
+
+  before_filter :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_action :check_authorization, only: [:edit, :update, :destroy]
 
@@ -11,9 +14,13 @@ class EventsController < ApplicationController
       @events = @events.after(params['start']).where(:service_id => session[:service_id_selected]) if (params['start'])
       @events = @events.before(params['end']).where(:service_id => session[:service_id_selected]) if (params['end'])
     else
+      if @business
       @events = Event.where(:user_id => @business.id)
       @events = @events.after(params['start']).where(:user_id => @business.id) if (params['start'])
       @events = @events.before(params['end']).where(:user_id => @business.id) if (params['end'])
+      else
+        @events = []
+      end
     end
 
     respond_to do |format|
