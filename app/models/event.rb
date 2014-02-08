@@ -6,6 +6,7 @@ class Event < ActiveRecord::Base
   belongs_to :service
   has_many :time_slots
 
+  belongs_to :user
 
   scope :before, lambda {|end_time| {:conditions => ["ends_at < ?", Event.format_date(end_time)] }}
   scope :after, lambda {|start_time| {:conditions => ["starts_at > ?", Event.format_date(start_time)] }}

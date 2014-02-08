@@ -6,13 +6,13 @@ class EventsController < ApplicationController
   def index
     if session[:service_id_selected].present?
       #Events filtered by Service
-      @events =  Event.scoped.where(:service_id => session[:service_id_selected])
+      @events = Event.scoped.where(:service_id => session[:service_id_selected]).where(:user_id => @business.id)
       @events = @events.after(params['start']).where(:service_id => session[:service_id_selected]) if (params['start'])
       @events = @events.before(params['end']).where(:service_id => session[:service_id_selected]) if (params['end'])
     else
-      @events = Event.scoped
-      @events = @events.after(params['start']) if (params['start'])
-      @events = @events.before(params['end']) if (params['end'])
+      @events = Event.where(:user_id => @business.id)
+      @events = @events.after(params['start']).where(:user_id => @business.id) if (params['start'])
+      @events = @events.before(params['end']).where(:user_id => @business.id) if (params['end'])
     end
 
     respond_to do |format|
@@ -50,7 +50,7 @@ class EventsController < ApplicationController
 # POST /events.json
   def create
     @event = Event.new(event_params)
-
+    @event.user = current_user
     respond_to do |format|
       if @event.save
         format.html { redirect_to calendar_path, notice: 'Event was successfully created.' }
@@ -91,7 +91,8 @@ class EventsController < ApplicationController
   private
 # Use callbacks to share common setup or constraints between actions.
   def set_event
-    @event = Event.find(params[:id])
+    #filer per user for security
+    @event = @business.events.find(params[:id])
   end
 
 # Never trust parameters from the scary internet, only allow the white list through.

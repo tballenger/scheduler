@@ -8,7 +8,6 @@ class ApplicationController < ActionController::Base
 
   helper_method :get_business_name, :get_business_description
 
-
   def get_xero_client
     $xero = Xeroizer::PublicApplication.new(APP_CONFIG['OAUTH_CONSUMER_KEY'],APP_CONFIG['OAUTH_CONSUMER_SECRET'])
 

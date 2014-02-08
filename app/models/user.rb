@@ -9,4 +9,6 @@ class User < ActiveRecord::Base
 
   has_many :services, dependent: :destroy
 
+  has_many :events, dependent: :destroy
+
 end

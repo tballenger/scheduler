@@ -6,7 +6,6 @@ class ServicesController < ApplicationController
   def index
     session[:service_id_selected] = nil
     session[:event_id_selected] = nil
-    #TODO: add filter by User
     if @business
       @services = @business.services
     else
@@ -71,7 +70,8 @@ class ServicesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_service
-      @service = Service.find(params[:id])
+      #filer per user for security
+      @service = @business.services.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
