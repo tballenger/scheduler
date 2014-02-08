@@ -1,8 +1,7 @@
 <div class="row">
   <div class="col-md-12">
     <h1><%= get_business_name %></h1>
-    <p class="lead">Please select a service</p>
-
+    <p class="lead"><%= !@services.empty? ? 'Please select a service' : 'This business has no service available' %> </p>
   </div>
 </div>
 

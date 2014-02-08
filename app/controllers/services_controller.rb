@@ -7,7 +7,11 @@ class ServicesController < ApplicationController
     session[:service_id_selected] = nil
     session[:event_id_selected] = nil
     #TODO: add filter by User
-    @services = Service.all
+    if @business
+      @services = @business.services
+    else
+      @services = []
+    end
   end
 
   # GET /services/1

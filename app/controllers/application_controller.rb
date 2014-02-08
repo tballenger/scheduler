@@ -43,7 +43,13 @@ class ApplicationController < ActionController::Base
   def find_business
     begin
       session[:username] = params[:username] if params[:username].present?
-      @business = User.where(:username => session[:username]).first if session[:username].present?
+      if session[:username].present?
+        #try to find user with username
+        @business = User.where(:username => session[:username]).first
+      else
+        #try to determinate if business is current user
+        @business = current_user
+      end
     rescue
       @business = nil
       session[:username] = nil
