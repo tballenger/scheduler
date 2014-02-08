@@ -16,7 +16,7 @@
                   <h1><%= service.name %></h1>
                 </div>
                 <div class="col-md-4">
-                  <%= link_to "Show", user_signed_in? ? service_path(service) : calendar_path(:service_id => service) , :class => "btn btn-primary btn-block" %>
+                  <%= link_to user_signed_in? ? 'Show' : 'Select', user_signed_in? ? service_path(service) : calendar_path(:service_id => service) , :class => "btn btn-primary btn-block" %>
                 </div>
               </div>
             </div>

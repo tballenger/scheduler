@@ -41,8 +41,8 @@
         <% end %>
 
         <li class="<%= controller_name == 'calendar' ? 'active' : '' %>"><%= link_to 'Calendar', calendar_path%></li>
-        <li class="<%= controller_name == 'contacts' && action_name == 'new'  ? 'active' : '' %>"><%= link_to 'Your Info', new_contact_path %></li>
-        <% if !user_signed_in? %>
+       <% if !user_signed_in? %>
+            <li class="<%= controller_name == 'contacts' && action_name == 'new'  ? 'active' : '' %>"><%= link_to 'Your Info', new_contact_path %></li>
             <li class="<%= controller_name == 'pages' && action_name == 'confirmation'  ? 'active' : '' %>"><%= link_to "Confirmation", confirmation_path %></li>
         <% end %>
       </ul>

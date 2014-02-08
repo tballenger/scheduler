@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :check_authorization, only: [:edit, :update, :destroy]
 
   # GET /events
   # GET /events.json
@@ -92,7 +93,11 @@ class EventsController < ApplicationController
 # Use callbacks to share common setup or constraints between actions.
   def set_event
     #filer per user for security
-    @event = @business.events.find(params[:id])
+    @event = Event.find(params[:id])
+  end
+
+  def check_authorization
+    raise 'Unauthorized' if @event.user != current_user
   end
 
 # Never trust parameters from the scary internet, only allow the white list through.

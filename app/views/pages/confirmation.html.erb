@@ -33,12 +33,12 @@
     <div class="well">
       <div class="row">
         <div class="col-md-6">
-          <h4>Bobs Haidressers</h4>
-          <p>311 Main Street, Suite 300, Los Angeles, CA 90230</p>
+          <h4><%=@business && @business.business_name%></h4>
+          <p><%=@business && @business.business_address%></p>
         </div>
         <div class="col-md-6">
-          <h4>310-310-3100</h4>
-          <p>contact@bobhairs.com</p>
+          <h4><%=@business && @business.business_phone%></h4>
+          <p><%=@business && @business.business_email%></p>
         </div>
       </div>
     </div>

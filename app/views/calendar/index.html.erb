@@ -33,12 +33,13 @@
               <%end%>
           <%end%>
         </div>
-        <p><%= link_to new_contact_path , :class => "btn btn-success btn-lg btn-block #{@time_slot ? '' : 'disabled' }" do%>
+        <p><%= link_to new_contact_path , :class => "btn btn-success btn-lg btn-block #{!@time_slot || current_user ? 'disabled' : '' }" do%>
           <span class="glyphicon glyphicon-calendar"></span>
           Confirm
           <%end%>
         </p>
-    <%else%>
+
+      <%else%>
         <h4>No Event Selected</h4>
     <%end%>
     </div><!--end body-->
