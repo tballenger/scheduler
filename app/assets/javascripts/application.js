@@ -17,4 +17,5 @@
 //= require turbolinks
 //= require bootstrap
 //= require fullcalendar
+//= require bootstrap-datepicker
 //= require_tree .

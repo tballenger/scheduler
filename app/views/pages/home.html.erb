@@ -1,48 +1,95 @@
 <section>
-  <div class="center">
     <h1>Simple Appointment Scheduling</h1>
     <p class="lead">Let your customers view, book and pay for services and appointments. <br>All integrated seamlessly with your accounting platform.</p>
+
+    <hr>  
+
+    <h3 class="text-success"><span class="glyphicon glyphicon-chevron-right"></span> Get started in seconds</h3>
+    <p>Pick a custom URL for your business & connect to your accounting platform:</p>
+
+    <%= form_tag(xero_session_new_path) do %> 
+      <div class="row">   
+        <div class="col-md-6">
+          <div class="input-group input-group-lg">
+            <span class="input-group-addon">scheduler.com/</span>
+            <%= text_field_tag 'user_name', (current_user && current_user.username) || session[:user_name], class: 'form-control', :autofocus => true, placeholder: 'Your business name', :required => 'true' %>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <%=submit_tag 'Connect to Xero', class: 'btn btn-primary btn-lg btn-block' %>
+        </div>
+      </div>
+    <%end%>
+
+
+</section>
+
+
+<section>
+<div class="row">
+  <div class="col-md-12 center">
+    <h3>How does it work?</h3>
+    <hr>
   </div>
+  
+    <div class="col-md-4 center">
+        <h3><span class="glyphicon glyphicon-cloud"></span></h3>
+        <h4>Create your page</h4>
+        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+    </div>
+ 
+    <div class="col-md-4 center">
+        <h3><span class="glyphicon glyphicon-list-alt"></span></h3>
+        <h4>Add your services & times</h4>
+        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+    </div>
+
+
+ 
+    <div class="col-md-4 center">
+        <h3><span class="glyphicon glyphicon-thumbs-up"></span></h3>
+        <h4>You're all set up!</h4>
+        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+    </div>
+
+
+</div>
 </section>
 
 <section>
-  <div class="row center">
-    <h3>Get Started</h3>
-    <div class="col-md-12 well">
-      <h4>Pick a custom URL & connect to your accounting platform:</h4>
-
-      <%= form_tag(xero_session_new_path) do %>
-          <div class="col-md-offset-2 col-md-6">
-            <div class="input-group input-group-lg">
-              <span class="input-group-addon">scheduler.com/</span>
-              <%= text_field_tag 'user_name', (current_user && current_user.username) || session[:user_name], class: 'form-control', placeholder: 'Username', :required => 'true' %>
+  <div class="row">
+    <div class="col-md-12 center">
+      <h3>How much does it cost?</h3>
+      <hr>
+      <div class="row">
+     
+        <div class="col-md-6 col-md-offset-3">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title center">Once price. All you can eat.</h3>
+            </div>
+            <div class="panel-body center">
+              <h2>$8 / month</h2>
+              <small class="text-muted">All plans come with 14 day free trial</small>
+            </div>
+              <ul class="list-group text-center">
+                <li class="list-group-item">Unlimited appointments</li>
+                <li class="list-group-item">Unlimited customers</li>
+                <li class="list-group-item">Integrated with your accounting platform</li>
+                <li class="list-group-item">Custom URL for your business</li>
+              </ul>
+            <div class="panel-footer">
+              <%= link_to "Upgrade", "#", :class => "btn btn-block btn-success" %>
             </div>
           </div>
-          <div class="col-md-3">
-            <%=submit_tag 'Connect to Xero', class: 'btn btn-primary btn-lg btn-block' %>
-          </div>
-      <%end%>
+        </div>
+
+
+      </div><!--row-->
+
     </div>
   </div>
+
+
+  </div>
 </section>
-
-<div class="row">
-  <div class="col-md-12 center">
-    <h3>How it works</h3>
-    <hr>
-  </div>
-  <div class="col-md-4">
-    <h4>Connect your accounting platform</h4>
-    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters</p>
-  </div>
-
-  <div class="col-md-4">
-    <h4>Create your scheduling page</h4>
-    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters</p>
-  </div>
-
-  <div class="col-md-4">
-    <h4>You're all set up!</h4>
-    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters</p>
-  </div>
-</div>
