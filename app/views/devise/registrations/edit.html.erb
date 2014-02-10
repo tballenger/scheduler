@@ -1,10 +1,9 @@
 <div class="row">
-  <div class="col-md-12 center">
-    <h1>Edit Profile</h1>
+  <div class="col-md-12">
+    <h1>My Dashboard</h1>
+    <hr>
   </div>
 </div>
-
-<hr>
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
     <%= devise_error_messages! %>
@@ -14,6 +13,18 @@
     <% end %>
 
     <div class="row">
+
+      <div class="col-md-4">
+        
+      <ul class="nav nav-pills nav-stacked">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Contacts</a></li>
+        <li><a href="#">Settings</a></li>
+      </ul>
+
+      </div><!--4-->
+
       <div class="col-md-8">
         <div class="row">
           <div class="row">
@@ -31,39 +42,49 @@
 
           <div class="row">
             <div class="step col-md-11">
-              <h3>Public Business information </h3>
+              <h3>Your Business information</h3>
               <p>Please add your public business information</p>
 
               <div class="row">
                 <div class="col-md-12">
+                  <div class="form-group">
                   <label>Business name</label>
                   <%= f.text_field :business_name, :class => 'form-control' %>
+                  </div>
                 </div>
               </div>
 
               <div class="row">
                 <div class="col-md-12">
+                  <div class="form-group">
                   <label>Business Description</label>
                   <%= f.text_field :business_description, :class => 'form-control' %>
+                  </div>
                 </div>
               </div>
 
               <div class="row">
                 <div class="col-md-12">
+                  <div class="form-group">
                   <label>Business Address</label>
                   <%= f.text_field :business_address, :class => 'form-control' %>
+                  </div>
                 </div>
               </div>
 
               <div class="row">
                 <div class="col-md-6">
+                  <div class="form-group">
                   <label>Business Phone</label>
                   <%= f.text_field :business_phone, :class => 'form-control' %>
+                  </div>
                 </div>
 
                 <div class="col-md-6">
+                  <div class="form-group">
                   <label>Business Email</label>
                   <%= f.email_field :business_email, :class => 'form-control' %>
+                  </div>
                 </div>
               </div>
 
@@ -79,26 +100,34 @@
 
               <div class="row">
                 <div class="col-md-12">
+                  <div class="form-group">
                   <label>Email address</label>
                   <%= f.email_field :email, :autofocus => true, :class => 'form-control', :required => 'true' %>
+                  </div>
                 </div>
               </div>
 
               <div class="row">
                 <div class="col-md-6">
+                  <div class="form-group">
                   <label>Create password <i> (leave blank if you don't want to change it)</i></label>
                   <%= f.password_field :password, :class => 'form-control' %>
+                  </div>
                 </div>
                 <div class="col-md-6">
+                  <div class="form-group">
                   <label>Confirm Password</label>
                   <%= f.password_field :password_confirmation, :class => 'form-control' %>
+                  </div>
                 </div>
               </div>
 
               <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12 well">
+                  <div class="form-group">
                   <label>Current password <i> (we need your current password to confirm your changes)</i></label>
                   <%= f.password_field :current_password, :class => 'form-control' %>
+                  </div>
                 </div>
 
               </div>
@@ -118,21 +147,24 @@
 
               <div class="row">
                 <div class="col-md-8">
+                  <div class="form-group">
                   <label>Credit Card Number</label>
                   <input type="text" class="form-control">
-                </div>
-                <div class="col-md-4">
-                  <img src="http://placehold.it/200x20">
+                  </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-4">
+                  <div class="form-group">
                   <label>Expiration</label>
                   <input type="text" class="form-control">
+                  </div>
                 </div>
                 <div class="col-md-4">
+                  <div class="form-group">
                   <label>Billing Zipcode</label>
                   <input type="text" class="form-control">
+                  </div>
                 </div>
               </div>
 
@@ -146,14 +178,7 @@
         </div>
       </div><!--8-->
 
-      <div class="col-md-4">
-        <h5>What is Scheduler?</h5>
-        <h5>How does it work with my accounting?</h5>
 
-        <h5>How do I cancel?</h5>
-        <span class="pull-left glyphicon glyphicon-ban-circle"></span>
-        <p>You can cancel or pause your plan at any time in your profile. No long term comittments or contracts what so ever.</p>
-      </div><!--4-->
     </div>
 
 

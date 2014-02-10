@@ -55,5 +55,5 @@ end
 gem 'xeroizer'
 gem 'devise'
 
-
+gem 'bootstrap-datepicker-rails'
 
